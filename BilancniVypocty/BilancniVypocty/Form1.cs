@@ -19,23 +19,23 @@ namespace BilancniVypocty
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ReseniSoustavyRovnic.linearniMatice = new float[4][];
+            ReseniSoustavyRovnic.nasobiciMatice = new float[4][];
 
-            ReseniSoustavyRovnic.linearniMatice[0] = new float[]{ 4, 3, 6 ,7};
-            ReseniSoustavyRovnic.linearniMatice[1] = new float[] { 2, 4, 8, 9 };
-            ReseniSoustavyRovnic.linearniMatice[2] = new float[] { 2, -3, 0, -9 };
-            ReseniSoustavyRovnic.linearniMatice[3] = new float[] { 5, 1, 3, -3 };
-            ReseniSoustavyRovnic.vysledkyLinearni = new float[] { 0, 1, 2, -3};
+            ReseniSoustavyRovnic.nasobiciMatice[0] = new float[]{ 7, -3, 6, 4};
+            ReseniSoustavyRovnic.nasobiciMatice[1] = new float[] { 2, 4, 0, 9 };
+            ReseniSoustavyRovnic.nasobiciMatice[2] = new float[] { 2, -3, 0, -9 };
+            ReseniSoustavyRovnic.nasobiciMatice[3] = new float[] { 5, 1, 0, -3 };
+            ReseniSoustavyRovnic.vysledkyNasobici = new float[] { 0, 1, 2, 3};
 
-            ReseniSoustavyRovnic.UpravaLinearniRovnice();
+            ReseniSoustavyRovnic.UpravaNasobneRovnice();
 
-            for (int i = 0; i < ReseniSoustavyRovnic.linearniMatice.Length; i++)
+            for (int i = 0; i < ReseniSoustavyRovnic.nasobiciMatice.Length; i++)
             {
-                for (int j = 0; j < ReseniSoustavyRovnic.linearniMatice[i].Length; j++)
+                for (int j = 0; j < ReseniSoustavyRovnic.nasobiciMatice[i].Length; j++)
                 {
-                    Console.Write(ReseniSoustavyRovnic.linearniMatice[i][j] + "; ");
+                    Console.Write(ReseniSoustavyRovnic.nasobiciMatice[i][j] + "; ");
                 }
-                Console.WriteLine("= " + ReseniSoustavyRovnic.vysledkyLinearni[i]);
+                Console.WriteLine("= " + ReseniSoustavyRovnic.vysledkyNasobici[i]);
             }
         }
 
