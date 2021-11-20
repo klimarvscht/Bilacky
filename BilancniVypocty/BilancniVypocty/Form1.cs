@@ -39,11 +39,6 @@ namespace BilancniVypocty
             }
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void VygenerovatProudyVychozi()
         {
 

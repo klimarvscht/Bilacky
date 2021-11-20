@@ -123,7 +123,6 @@
             this.textBox2.TabStop = false;
             this.textBox2.Text = "Počet výchozích proudů:";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // textBox3
             // 
