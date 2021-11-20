@@ -8,3 +8,13 @@ Z:\Documents\Visual Studio 2017\Projekty\BilancniVypocty\BilancniVypocty\obj\Deb
 Z:\Documents\Visual Studio 2017\Projekty\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.csproj.CoreCompileInputs.cache
 Z:\Documents\Visual Studio 2017\Projekty\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.exe
 Z:\Documents\Visual Studio 2017\Projekty\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.pdb
+Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypocty\bin\Debug\BilancniVypocty.exe.config
+Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypocty\bin\Debug\BilancniVypocty.exe
+Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypocty\bin\Debug\BilancniVypocty.pdb
+Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.csprojAssemblyReference.cache
+Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.Form1.resources
+Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.Properties.Resources.resources
+Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.csproj.GenerateResource.cache
+Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.csproj.CoreCompileInputs.cache
+Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.exe
+Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.pdb

@@ -29,14 +29,11 @@ namespace BilancniVypocty
 
             ReseniSoustavyRovnic.UpravaNasobneRovnice();
 
-            for (int i = 0; i < ReseniSoustavyRovnic.nasobiciMatice.Length; i++)
-            {
-                for (int j = 0; j < ReseniSoustavyRovnic.nasobiciMatice[i].Length; j++)
-                {
-                    Console.Write(ReseniSoustavyRovnic.nasobiciMatice[i][j] + "; ");
-                }
-                Console.WriteLine("= " + ReseniSoustavyRovnic.vysledkyNasobici[i]);
-            }
+            ReseniSoustavyRovnic.nezname = new Neznama[ReseniSoustavyRovnic.nasobiciMatice[0].Length];
+
+            ReseniSoustavyRovnic.ExtrahujHodnotyNasobiciRovnice();
+
+            Console.WriteLine("done");
         }
 
         private void VygenerovatProudyVychozi()
