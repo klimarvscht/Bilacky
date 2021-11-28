@@ -12,6 +12,8 @@ namespace BilancniVypocty
 {
     public partial class Form1 : Form
     {
+        public static nastaveniSlozek nastaveni = null;
+        public static Krmitko krmitko = null;
         public Form1()
         {
             InitializeComponent();
@@ -19,26 +21,48 @@ namespace BilancniVypocty
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ReseniSoustavyRovnic.nasobiciMatice = new float[4][];
+            Uzel.slozek = 3;
+            Uzel uzlik = new Uzel(2, 3);
 
-            ReseniSoustavyRovnic.nasobiciMatice[0] = new float[]{ 7, -3, 6, 4};
-            ReseniSoustavyRovnic.nasobiciMatice[1] = new float[] { 2, 4, 0, 9 };
-            ReseniSoustavyRovnic.nasobiciMatice[2] = new float[] { 2, -3, 0, -9 };
-            ReseniSoustavyRovnic.nasobiciMatice[3] = new float[] { 5, 1, 0, -3 };
-            ReseniSoustavyRovnic.vysledkyNasobici = new float[] { 0, 1, 2, 3};
+            /*
+            uzlik.ExtrahujNezname();
 
-            ReseniSoustavyRovnic.UpravaNasobneRovnice();
+            uzlik.ExtrahujRovnice();
 
-            ReseniSoustavyRovnic.nezname = new Neznama[ReseniSoustavyRovnic.nasobiciMatice[0].Length];
+            ReseniSoustavyRovnic.VypisNezname();
 
-            ReseniSoustavyRovnic.ExtrahujHodnotyNasobiciRovnice();
+            ReseniSoustavyRovnic.VypisMatici(ReseniSoustavyRovnic.linearniMatice, ReseniSoustavyRovnic.vysledkyLinearni);
+            ReseniSoustavyRovnic.VypisMatici(ReseniSoustavyRovnic.nasobiciMatice, ReseniSoustavyRovnic.vysledkyNasobici);
+            */
 
             Console.WriteLine("done");
         }
 
-        private void VygenerovatProudyVychozi()
+        private void btnNastaveniSlozek_Click(object sender, EventArgs e)
         {
+            if (nastaveni == null && krmitko == null)
+            {
+                nastaveni = new nastaveniSlozek();
+                nastaveni.Show();
+            }
+        }
 
+        private void vztup_Click(object sender, EventArgs e)
+        {
+            if (nastaveni == null && krmitko == null)
+            {
+                krmitko = new Krmitko(Uzel.uzel.vztupniProudy.ToArray(), "Nastavení vztuních proudů");
+                krmitko.Show();
+            }
+        }
+
+        private void vyztup_Click(object sender, EventArgs e)
+        {
+            if (nastaveni == null && krmitko == null)
+            {
+                krmitko = new Krmitko(Uzel.uzel.vystupniProudy.ToArray(), "Nastavení vztuních proudů");
+                krmitko.Show();
+            }
         }
     }
 }

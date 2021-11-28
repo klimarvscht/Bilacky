@@ -28,132 +28,63 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pocetSlozek = new System.Windows.Forms.NumericUpDown();
-            this.pocetVzupnichProudu = new System.Windows.Forms.NumericUpDown();
-            this.pocetVystupnichProudu = new System.Windows.Forms.NumericUpDown();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pocetSlozek)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pocetVzupnichProudu)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pocetVystupnichProudu)).BeginInit();
+            this.btnNastaveniSlozek = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.vztup = new System.Windows.Forms.Button();
+            this.vyztup = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // pocetSlozek
+            // btnNastaveniSlozek
             // 
-            this.pocetSlozek.Location = new System.Drawing.Point(158, 0);
-            this.pocetSlozek.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.pocetSlozek.Minimum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.pocetSlozek.Name = "pocetSlozek";
-            this.pocetSlozek.Size = new System.Drawing.Size(120, 20);
-            this.pocetSlozek.TabIndex = 0;
-            this.pocetSlozek.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
+            this.btnNastaveniSlozek.Location = new System.Drawing.Point(790, 62);
+            this.btnNastaveniSlozek.Name = "btnNastaveniSlozek";
+            this.btnNastaveniSlozek.Size = new System.Drawing.Size(75, 23);
+            this.btnNastaveniSlozek.TabIndex = 0;
+            this.btnNastaveniSlozek.Text = "Nastavit";
+            this.btnNastaveniSlozek.UseVisualStyleBackColor = true;
+            this.btnNastaveniSlozek.Click += new System.EventHandler(this.btnNastaveniSlozek_Click);
             // 
-            // pocetVzupnichProudu
+            // label1
             // 
-            this.pocetVzupnichProudu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pocetVzupnichProudu.Location = new System.Drawing.Point(470, 0);
-            this.pocetVzupnichProudu.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.pocetVzupnichProudu.Name = "pocetVzupnichProudu";
-            this.pocetVzupnichProudu.Size = new System.Drawing.Size(120, 20);
-            this.pocetVzupnichProudu.TabIndex = 1;
-            this.pocetVzupnichProudu.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(800, 46);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Nastaveni";
             // 
-            // pocetVystupnichProudu
+            // vztup
             // 
-            this.pocetVystupnichProudu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pocetVystupnichProudu.Location = new System.Drawing.Point(779, 0);
-            this.pocetVystupnichProudu.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.pocetVystupnichProudu.Name = "pocetVystupnichProudu";
-            this.pocetVystupnichProudu.Size = new System.Drawing.Size(120, 20);
-            this.pocetVystupnichProudu.TabIndex = 2;
-            this.pocetVystupnichProudu.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.vztup.Location = new System.Drawing.Point(234, 215);
+            this.vztup.Name = "vztup";
+            this.vztup.Size = new System.Drawing.Size(75, 23);
+            this.vztup.TabIndex = 2;
+            this.vztup.Text = "vztup";
+            this.vztup.UseVisualStyleBackColor = true;
+            this.vztup.Click += new System.EventHandler(this.vztup_Click);
             // 
-            // textBox1
+            // vyztup
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox1.Location = new System.Drawing.Point(52, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(100, 14);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.TabStop = false;
-            this.textBox1.Text = "Počet složek:";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox2
-            // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox2.Location = new System.Drawing.Point(314, 0);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(150, 14);
-            this.textBox2.TabIndex = 4;
-            this.textBox2.TabStop = false;
-            this.textBox2.Text = "Počet výchozích proudů:";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox3
-            // 
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox3.Location = new System.Drawing.Point(623, 0);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(150, 14);
-            this.textBox3.TabIndex = 5;
-            this.textBox3.TabStop = false;
-            this.textBox3.Text = "Počet konečných proudů:";
-            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.vyztup.Location = new System.Drawing.Point(423, 215);
+            this.vyztup.Name = "vyztup";
+            this.vyztup.Size = new System.Drawing.Size(75, 23);
+            this.vyztup.TabIndex = 3;
+            this.vyztup.Text = "výstup";
+            this.vyztup.UseVisualStyleBackColor = true;
+            this.vyztup.Click += new System.EventHandler(this.vyztup_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(900, 499);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.pocetVystupnichProudu);
-            this.Controls.Add(this.pocetVzupnichProudu);
-            this.Controls.Add(this.pocetSlozek);
+            this.Controls.Add(this.vyztup);
+            this.Controls.Add(this.vztup);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnNastaveniSlozek);
             this.Name = "Form1";
             this.Text = "Výpočet bilančních ronvnic";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pocetSlozek)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pocetVzupnichProudu)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pocetVystupnichProudu)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -161,12 +92,10 @@
 
         #endregion
 
-        private System.Windows.Forms.NumericUpDown pocetSlozek;
-        private System.Windows.Forms.NumericUpDown pocetVzupnichProudu;
-        private System.Windows.Forms.NumericUpDown pocetVystupnichProudu;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button btnNastaveniSlozek;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button vztup;
+        private System.Windows.Forms.Button vyztup;
     }
 }
 

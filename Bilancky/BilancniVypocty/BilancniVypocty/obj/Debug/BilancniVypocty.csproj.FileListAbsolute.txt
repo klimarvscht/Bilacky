@@ -18,3 +18,5 @@ Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypoct
 Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.csproj.CoreCompileInputs.cache
 Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.exe
 Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.pdb
+Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.nastaveniSlozek.resources
+Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.Krmitko.resources

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace BilancniVypocty
 {
-    class Neznama
+    public class Neznama
     {
+        public int indexVPoli = -1;
         public float max;
         public float min;
         public float value;
@@ -34,6 +35,18 @@ namespace BilancniVypocty
             {
                 value = 0;
             }
+        }
+
+        public string GetName()
+        {
+            string name = jmeno;
+
+            if (indexSlozky != 0)
+            {
+                name += Uzel.alpha[indexSlozky - 1];
+            }
+
+            return name;
         }
     }
 }
