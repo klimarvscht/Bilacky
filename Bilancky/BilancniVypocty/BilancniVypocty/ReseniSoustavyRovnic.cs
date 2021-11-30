@@ -14,8 +14,6 @@ namespace BilancniVypocty
         public static float[] vysledkyLinearni;
         public static float[] vysledkyNasobici;
 
-        public const float PlynovaKonstanta = 8.31446261815324f;
-
         public static void UpravaLinearniRovnice()
         {
             int skipnuto = 0;
@@ -32,19 +30,33 @@ namespace BilancniVypocty
 
                 if (i - skipnuto != radek)
                 {
+                    
                     float[] podrzRovnici = linearniMatice[i - skipnuto];
                     linearniMatice[i - skipnuto] = linearniMatice[radek];
                     linearniMatice[radek] = podrzRovnici;
-
+                    
                     float podrzVysledek = vysledkyLinearni[radek];
                     vysledkyLinearni[radek] = vysledkyLinearni[i - skipnuto];
                     vysledkyLinearni[i - skipnuto] = podrzVysledek;
                 }
 
-                for (int j = i - skipnuto + 1; j < linearniMatice.Length; j++)
+                if (linearniMatice[i - skipnuto][i] == 0)
                 {
+                    Console.WriteLine();
+                }
+
+                
+                for (int j = 0; j < linearniMatice.Length; j++)
+                {
+                    if (j == i - skipnuto)
+                    {
+                        continue;
+                    }
+                    
                     float koeficient = linearniMatice[j][i] / linearniMatice[i - skipnuto][i];
+
                     vysledkyLinearni[j] -= vysledkyLinearni[i - skipnuto] * koeficient;
+
                     for (int k = i + 1; k < linearniMatice[j].Length; k++)
                     {
                         linearniMatice[j][k] -= linearniMatice[i - skipnuto][k] * koeficient;
@@ -52,6 +64,8 @@ namespace BilancniVypocty
                     linearniMatice[j][i] = 0;
                 }
 
+                float[][] pomoc = linearniMatice;
+                Console.WriteLine();
             }
         }
 
@@ -94,6 +108,8 @@ namespace BilancniVypocty
                 if (nezname[i].known)
                 {
                     DosazeniNeznameLinearni(i);
+
+                    Console.WriteLine("nefachám");
                 }
             }
         }
@@ -115,8 +131,6 @@ namespace BilancniVypocty
 
             for (int i = 0; i < nasobiciMatice[0].Length && i < nasobiciMatice.Length + skipnuto - rovnaSeNula; i++)
             {
-                float[][] debug = nasobiciMatice;
-                float[] thebug = vysledkyNasobici;
                 int radek = VhodnySloupec(nasobiciMatice, i, i - skipnuto, rovnaSeNula);
 
                 if (radek == -1)
@@ -300,6 +314,8 @@ namespace BilancniVypocty
                 }
                 Console.WriteLine("= " + hodnoty[i]);
             }
+
+            Console.WriteLine();
         }
 
         public static void VypisNezname()
@@ -307,9 +323,23 @@ namespace BilancniVypocty
             Console.WriteLine();
             for (int i = 0; i < nezname.Length; i++)
             {
-                Console.WriteLine(i + ". Neznama = " + nezname[i].value);
+                Console.WriteLine(nezname[i].jmeno + " = " + nezname[i].value);
             }
         }
 
+        public static void RESET()
+        {
+            foreach (Neznama item in nezname)
+            {
+                item.indexVPoli = -1;
+            }
+
+            nezname = null;
+
+            linearniMatice = null;
+            nasobiciMatice = null;
+            vysledkyLinearni = null;
+            vysledkyNasobici = null;
+        }
     }
 }

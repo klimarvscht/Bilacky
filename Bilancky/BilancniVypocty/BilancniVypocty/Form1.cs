@@ -75,12 +75,10 @@ namespace BilancniVypocty
             LinearniCast();
             while (true)
             {
-                /*
                 if (!NasobiciCast())
                 {
                     break;
                 }
-                */
 
                 if (!LinearniCast())
                 {
@@ -88,7 +86,9 @@ namespace BilancniVypocty
                 }
             }
 
-            ReseniSoustavyRovnic.VypisMatici(ReseniSoustavyRovnic.linearniMatice, ReseniSoustavyRovnic.vysledkyLinearni);
+            ReseniSoustavyRovnic.VypisMatici(ReseniSoustavyRovnic.nasobiciMatice, ReseniSoustavyRovnic.vysledkyNasobici);
+
+            //ReseniSoustavyRovnic.VypisMatici(ReseniSoustavyRovnic.linearniMatice, ReseniSoustavyRovnic.vysledkyLinearni);
 
             ReseniSoustavyRovnic.RESET();
 
