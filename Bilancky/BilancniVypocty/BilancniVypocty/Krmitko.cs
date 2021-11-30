@@ -16,25 +16,45 @@ namespace BilancniVypocty
         Neznama[] nezname;
         CheckBox[] chkBoxy;
         NumericUpDown[] numeric;
+        int[] indexy;
+
+        int indexik;
 
         public Krmitko(Proud[] proudy, string jmeno)
         {
             this.proudy = proudy;
-            this.Name = jmeno;
+            indexik = 0;
             InitializeComponent();
-            Vygeneruj(0);
+            this.Name = jmeno;
+            this.Text = jmeno;
+            Vygeneruj(indexik);
+            FormClosing += Zaviracka;
         }
 
         private void Vygeneruj(int cisloProudu)
         {
             panel.Controls.Clear();
 
-            nezname = proudy[cisloProudu].NeznameDoListu(0).ToArray();
+            LabelProud.Text = "Proud: " + (proudy[cisloProudu].indexProudu + 1);
+
+            nezname = proudy[cisloProudu].NeznameDoListu(0, true).ToArray();
             chkBoxy = new CheckBox[nezname.Length];
             numeric = new NumericUpDown[nezname.Length];
+
+            List<int> listIndexu = new List<int>();
+            int odestup = 0;
             for (int i = 0; i < nezname.Length; i++)
             {
-                int odestup = i * 30;
+                if (!nezname[i].chciVypsat)
+                {
+                    continue;
+                }
+                else if (!proudy[cisloProudu].plyn && nezname[i].pozeProPlyn)
+                {
+                    continue;
+                }
+
+                odestup += 30;
 
                 chkBoxy[i] = NastavChkbox(odestup, i, nezname[i].known);
                 panel.Controls.Add(chkBoxy[i]);
@@ -43,8 +63,11 @@ namespace BilancniVypocty
 
                 numeric[i] = NastavNumericUpDown(odestup, i, nezname[i].value, nezname[i].min, nezname[i].max);
                 panel.Controls.Add(numeric[i]);
-                Console.WriteLine("funguju");
+
+                listIndexu.Add(i);
             }
+
+            indexy = listIndexu.ToArray();
         }
 
 
@@ -88,7 +111,7 @@ namespace BilancniVypocty
 
         private void OnNumChanged(object sender, EventArgs e)
         {
-            int index = IndexSenderu(sender, numeric);
+            int index = indexy[IndexSenderu(sender, numeric)];
             nezname[index].value = (float)numeric[index].Value;
             nezname[index].known = true;
             chkBoxy[index].Checked = true;
@@ -110,6 +133,34 @@ namespace BilancniVypocty
                 }
             }
             return -1;
+        }
+
+        private void btnDalsiProud_Click(object sender, EventArgs e)
+        {
+            indexik += 1;
+            if (indexik == proudy.Length)
+            {
+                indexik -= proudy.Length;
+            }
+
+            Vygeneruj(indexik);
+        }
+
+        private void btnPredchoziProud_Click(object sender, EventArgs e)
+        {
+            indexik -= 1;
+            if (indexik < 0)
+            {
+                indexik += proudy.Length;
+            }
+
+            Vygeneruj(indexik);
+        }
+
+        private void Zaviracka(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = false;
+            Form1.krmitko = null;
         }
     }
 }

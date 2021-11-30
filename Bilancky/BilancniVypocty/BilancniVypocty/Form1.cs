@@ -64,5 +64,49 @@ namespace BilancniVypocty
                 krmitko.Show();
             }
         }
+
+        private void Vypocet_Click(object sender, EventArgs e)
+        {
+            Vypocet.Enabled = false;
+            Uzel.uzel.ExtrahujNezname();
+            Uzel.uzel.ExtrahujRovnice();
+            
+
+            LinearniCast();
+            while (true)
+            {
+                /*
+                if (!NasobiciCast())
+                {
+                    break;
+                }
+                */
+
+                if (!LinearniCast())
+                {
+                    break;
+                }
+            }
+
+            ReseniSoustavyRovnic.VypisMatici(ReseniSoustavyRovnic.linearniMatice, ReseniSoustavyRovnic.vysledkyLinearni);
+
+            ReseniSoustavyRovnic.RESET();
+
+            Vypocet.Enabled = true;
+        }
+
+        private bool LinearniCast()
+        {
+            ReseniSoustavyRovnic.PredPripravLinearni();
+            ReseniSoustavyRovnic.UpravaLinearniRovnice();
+            return ReseniSoustavyRovnic.ExthrahujHodnotyLinearni();
+        }
+
+        private bool NasobiciCast()
+        {
+            ReseniSoustavyRovnic.PredPripravNasobici();
+            ReseniSoustavyRovnic.UpravaNasobneRovnice();
+            return ReseniSoustavyRovnic.ExtrahujHodnotyNasobiciRovnice();
+        }
     }
 }

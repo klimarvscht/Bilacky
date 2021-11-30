@@ -32,6 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.vztup = new System.Windows.Forms.Button();
             this.vyztup = new System.Windows.Forms.Button();
+            this.Vypocet = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnNastaveniSlozek
@@ -73,11 +74,22 @@
             this.vyztup.UseVisualStyleBackColor = true;
             this.vyztup.Click += new System.EventHandler(this.vyztup_Click);
             // 
+            // Vypocet
+            // 
+            this.Vypocet.Location = new System.Drawing.Point(369, 368);
+            this.Vypocet.Name = "Vypocet";
+            this.Vypocet.Size = new System.Drawing.Size(75, 23);
+            this.Vypocet.TabIndex = 4;
+            this.Vypocet.Text = "Vypočítat";
+            this.Vypocet.UseVisualStyleBackColor = true;
+            this.Vypocet.Click += new System.EventHandler(this.Vypocet_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(900, 499);
+            this.Controls.Add(this.Vypocet);
             this.Controls.Add(this.vyztup);
             this.Controls.Add(this.vztup);
             this.Controls.Add(this.label1);
@@ -96,6 +108,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button vztup;
         private System.Windows.Forms.Button vyztup;
+        private System.Windows.Forms.Button Vypocet;
     }
 }
 

@@ -42,7 +42,7 @@
             // 
             // numPocetSlozek
             // 
-            this.numPocetSlozek.Location = new System.Drawing.Point(257, 7);
+            this.numPocetSlozek.Location = new System.Drawing.Point(162, 7);
             this.numPocetSlozek.Maximum = new decimal(new int[] {
             10,
             0,
@@ -65,7 +65,7 @@
             // PocetSlozek
             // 
             this.PocetSlozek.AutoSize = true;
-            this.PocetSlozek.Location = new System.Drawing.Point(183, 9);
+            this.PocetSlozek.Location = new System.Drawing.Point(88, 9);
             this.PocetSlozek.Name = "PocetSlozek";
             this.PocetSlozek.Size = new System.Drawing.Size(68, 13);
             this.PocetSlozek.TabIndex = 1;
@@ -73,7 +73,7 @@
             // 
             // Ulozit
             // 
-            this.Ulozit.Location = new System.Drawing.Point(205, 201);
+            this.Ulozit.Location = new System.Drawing.Point(81, 199);
             this.Ulozit.Name = "Ulozit";
             this.Ulozit.Size = new System.Drawing.Size(75, 23);
             this.Ulozit.TabIndex = 2;
@@ -84,7 +84,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(131, 72);
+            this.label1.Location = new System.Drawing.Point(36, 72);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(120, 13);
             this.label1.TabIndex = 4;
@@ -92,7 +92,7 @@
             // 
             // numVztupProud
             // 
-            this.numVztupProud.Location = new System.Drawing.Point(257, 70);
+            this.numVztupProud.Location = new System.Drawing.Point(162, 70);
             this.numVztupProud.Maximum = new decimal(new int[] {
             10,
             0,
@@ -115,7 +115,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(129, 125);
+            this.label2.Location = new System.Drawing.Point(34, 125);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(122, 13);
             this.label2.TabIndex = 6;
@@ -123,7 +123,7 @@
             // 
             // numVystoupProud
             // 
-            this.numVystoupProud.Location = new System.Drawing.Point(257, 123);
+            this.numVystoupProud.Location = new System.Drawing.Point(162, 123);
             this.numVystoupProud.Maximum = new decimal(new int[] {
             10,
             0,
@@ -147,7 +147,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(508, 301);
+            this.ClientSize = new System.Drawing.Size(243, 242);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.numVystoupProud);
             this.Controls.Add(this.label1);
@@ -155,6 +155,8 @@
             this.Controls.Add(this.Ulozit);
             this.Controls.Add(this.PocetSlozek);
             this.Controls.Add(this.numPocetSlozek);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MinimizeBox = false;
             this.Name = "nastaveniSlozek";
             this.Text = "NastaveniSlozek";
             ((System.ComponentModel.ISupportInitialize)(this.numPocetSlozek)).EndInit();

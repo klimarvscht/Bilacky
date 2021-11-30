@@ -17,8 +17,10 @@ namespace BilancniVypocty
         public string jednotka;
         public int indexProudu;
         public int indexSlozky;
+        public bool chciVypsat;
+        public bool pozeProPlyn;
 
-        public Neznama(float maximum, float minimum, string jmeno, string jednotka, int indexProudu,int indexSlozky)
+        public Neznama(float maximum, float minimum, string jmeno, string jednotka, int indexProudu,int indexSlozky, bool chciVeVypisu, bool plyn)
         {
             this.max = maximum;
             this.min = minimum;
@@ -27,6 +29,29 @@ namespace BilancniVypocty
             this.indexSlozky = indexSlozky;
             this.jednotka = jednotka;
             known = false;
+            chciVypsat = chciVeVypisu;
+            pozeProPlyn = plyn;
+            if (minimum > 0)
+            {
+                value = minimum;
+            }
+            else
+            {
+                value = 0;
+            }
+        }
+
+        public Neznama(float maximum, float minimum, string jmeno, string jednotka, int indexProudu, int indexSlozky)
+        {
+            this.max = maximum;
+            this.min = minimum;
+            this.jmeno = jmeno;
+            this.indexProudu = indexProudu;
+            this.indexSlozky = indexSlozky;
+            this.jednotka = jednotka;
+            known = false;
+            chciVypsat = true;
+            pozeProPlyn = false;
             if (minimum > 0)
             {
                 value = minimum;
