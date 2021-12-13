@@ -14,6 +14,8 @@ namespace BilancniVypocty
     {
         public static nastaveniSlozek nastaveni = null;
         public static Krmitko krmitko = null;
+        public static bool pocitam = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -49,7 +51,7 @@ namespace BilancniVypocty
 
         private void vztup_Click(object sender, EventArgs e)
         {
-            if (nastaveni == null && krmitko == null)
+            if (nastaveni == null && krmitko == null && !pocitam)
             {
                 krmitko = new Krmitko(Uzel.uzel.vztupniProudy.ToArray(), "Nastavení vztuních proudů");
                 krmitko.Show();
@@ -58,7 +60,7 @@ namespace BilancniVypocty
 
         private void vyztup_Click(object sender, EventArgs e)
         {
-            if (nastaveni == null && krmitko == null)
+            if (nastaveni == null && krmitko == null && !pocitam)
             {
                 krmitko = new Krmitko(Uzel.uzel.vystupniProudy.ToArray(), "Nastavení vztuních proudů");
                 krmitko.Show();
@@ -68,17 +70,23 @@ namespace BilancniVypocty
         private void Vypocet_Click(object sender, EventArgs e)
         {
             Vypocet.Enabled = false;
+            pocitam = true;
             Uzel.uzel.ExtrahujNezname();
             Uzel.uzel.ExtrahujRovnice();
-            
+
+            ReseniSoustavyRovnic.VypisMaticiChytre(ReseniSoustavyRovnic.nasobiciMatice, ReseniSoustavyRovnic.vysledkyNasobici);
+
+            ReseniSoustavyRovnic.VypisMaticiChytre(ReseniSoustavyRovnic.linearniMatice, ReseniSoustavyRovnic.vysledkyLinearni);
 
             LinearniCast();
             while (true)
             {
+                
                 if (!NasobiciCast())
                 {
                     break;
                 }
+                
 
                 if (!LinearniCast())
                 {
@@ -86,27 +94,24 @@ namespace BilancniVypocty
                 }
             }
 
-            ReseniSoustavyRovnic.VypisMatici(ReseniSoustavyRovnic.nasobiciMatice, ReseniSoustavyRovnic.vysledkyNasobici);
-
             //ReseniSoustavyRovnic.VypisMatici(ReseniSoustavyRovnic.linearniMatice, ReseniSoustavyRovnic.vysledkyLinearni);
 
             ReseniSoustavyRovnic.RESET();
 
+            pocitam = false;
             Vypocet.Enabled = true;
         }
 
         private bool LinearniCast()
         {
             ReseniSoustavyRovnic.PredPripravLinearni();
-            ReseniSoustavyRovnic.UpravaLinearniRovnice();
-            return ReseniSoustavyRovnic.ExthrahujHodnotyLinearni();
+            return ReseniSoustavyRovnic.UpravaLinearniRovnice();
         }
 
         private bool NasobiciCast()
         {
             ReseniSoustavyRovnic.PredPripravNasobici();
-            ReseniSoustavyRovnic.UpravaNasobneRovnice();
-            return ReseniSoustavyRovnic.ExtrahujHodnotyNasobiciRovnice();
+            return ReseniSoustavyRovnic.UpravaNasobneRovnice();
         }
     }
 }

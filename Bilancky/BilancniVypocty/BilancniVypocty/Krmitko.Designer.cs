@@ -35,6 +35,8 @@
             this.LabelProud = new System.Windows.Forms.Label();
             this.btnDalsiProud = new System.Windows.Forms.Button();
             this.btnPredchoziProud = new System.Windows.Forms.Button();
+            this.plyn = new System.Windows.Forms.Label();
+            this.chkPlyn = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // nazev
@@ -89,7 +91,7 @@
             this.btnDalsiProud.Name = "btnDalsiProud";
             this.btnDalsiProud.Size = new System.Drawing.Size(75, 23);
             this.btnDalsiProud.TabIndex = 6;
-            this.btnDalsiProud.Text = "Daší";
+            this.btnDalsiProud.Text = "Další";
             this.btnDalsiProud.UseVisualStyleBackColor = true;
             this.btnDalsiProud.Click += new System.EventHandler(this.btnDalsiProud_Click);
             // 
@@ -103,11 +105,33 @@
             this.btnPredchoziProud.UseVisualStyleBackColor = true;
             this.btnPredchoziProud.Click += new System.EventHandler(this.btnPredchoziProud_Click);
             // 
+            // plyn
+            // 
+            this.plyn.AutoSize = true;
+            this.plyn.Location = new System.Drawing.Point(195, 53);
+            this.plyn.Name = "plyn";
+            this.plyn.Size = new System.Drawing.Size(26, 13);
+            this.plyn.TabIndex = 8;
+            this.plyn.Text = "plyn";
+            // 
+            // chkPlyn
+            // 
+            this.chkPlyn.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.chkPlyn.AutoSize = true;
+            this.chkPlyn.Location = new System.Drawing.Point(227, 52);
+            this.chkPlyn.Name = "chkPlyn";
+            this.chkPlyn.Size = new System.Drawing.Size(15, 14);
+            this.chkPlyn.TabIndex = 9;
+            this.chkPlyn.UseVisualStyleBackColor = true;
+            this.chkPlyn.CheckedChanged += new System.EventHandler(this.OnPlynChanged);
+            // 
             // Krmitko
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(496, 572);
+            this.Controls.Add(this.chkPlyn);
+            this.Controls.Add(this.plyn);
             this.Controls.Add(this.btnPredchoziProud);
             this.Controls.Add(this.btnDalsiProud);
             this.Controls.Add(this.LabelProud);
@@ -132,5 +156,7 @@
         private System.Windows.Forms.Label LabelProud;
         private System.Windows.Forms.Button btnDalsiProud;
         private System.Windows.Forms.Button btnPredchoziProud;
+        private System.Windows.Forms.Label plyn;
+        private System.Windows.Forms.CheckBox chkPlyn;
     }
 }
