@@ -11,9 +11,11 @@ namespace BilancniVypocty
     {
         private const float plynovaKonstanta = 8.31446261815324f;
 
-        public int indexProudu;
+        public int indexProudu; // o jaký proud se jedná
 
-        public bool plyn;
+        public bool plyn; // je danný proud plynný
+
+        // proud si spravuje stavové veličiny
 
         // celkove proměnné
         public Neznama celkovaHmotnost;
@@ -87,6 +89,8 @@ namespace BilancniVypocty
         {
             this.indexProudu = indexProudu;
             
+            // definice Neznama
+
             celkovaHmotnost = new Neznama((float)(decimal.MaxValue * (decimal)0.99), 0, "m", "kg", indexProudu, 0); // slozka 0 - celkova proudu
 
             hustota = new Neznama((float)(decimal.MaxValue * (decimal) 0.99), 0, "ϱ", "kg*m^(-3)", indexProudu, 0);
@@ -157,7 +161,7 @@ namespace BilancniVypocty
             plyn = false;
         }
 
-        private Neznama[] NastavPoleNeznamych(int pocetSlozek, float maximum, float minimum, string jmeno, string jednotka)
+        private Neznama[] NastavPoleNeznamych(int pocetSlozek, float maximum, float minimum, string jmeno, string jednotka) // nastavení pole neznámých
         {
             Neznama[] nezname = new Neznama[pocetSlozek];
 
@@ -169,7 +173,7 @@ namespace BilancniVypocty
             return nezname;
         }
 
-        private Neznama[] NastavPoleNeznamych(int pocetSlozek, float maximum, float minimum, string jmeno, string jednotka, bool chciVypsat, bool plyn)
+        private Neznama[] NastavPoleNeznamych(int pocetSlozek, float maximum, float minimum, string jmeno, string jednotka, bool chciVypsat, bool plyn) // nastavení pole neznámých pro rozšířený konstruktor
         {
             Neznama[] nezname = new Neznama[pocetSlozek];
 
@@ -186,7 +190,7 @@ namespace BilancniVypocty
             return NastavDoProudu(pocetSlozek, pocetProudu, true);
         }
 
-        private Neznama[][] NastavDoProudu(int pocetSlozek, int pocetProudu, bool chciVypsat)
+        private Neznama[][] NastavDoProudu(int pocetSlozek, int pocetProudu, bool chciVypsat) // nastaví Neznámé do Proudu
         {
             Neznama[][] pomocna = new Neznama[pocetSlozek][];
             for (int i = 0; i < pocetSlozek; i++)
@@ -204,7 +208,7 @@ namespace BilancniVypocty
             return pomocna;
         }
 
-        public List<Neznama> NeznameDoListu(int pocatecnyIndex, bool chciINaindexovane)
+        public List<Neznama> NeznameDoListu(int pocatecnyIndex, bool chciINaindexovane) // vrátí všechny neznámé z proudu a pokud chceme tak je i naindexuje
         {
             List<Neznama> vratit = new List<Neznama>();
 
@@ -228,6 +232,8 @@ namespace BilancniVypocty
 
             vratit.AddRange(PoleNeznamychDoListu(hmotnostiSlozek, vratit.Count + pocatecnyIndex, chciINaindexovane));
 
+            vratit.AddRange(PoleNeznamychDoListu(latkoveMnozstvi, vratit.Count + pocatecnyIndex, chciINaindexovane));
+
             vratit.AddRange(PoleNeznamychDoListu(hmotnostniZlomky, vratit.Count + pocatecnyIndex, chciINaindexovane));
 
             vratit.AddRange(PoleNeznamychDoListu(relativnihmotnostniZlomky, vratit.Count + pocatecnyIndex, chciINaindexovane));
@@ -239,8 +245,6 @@ namespace BilancniVypocty
             vratit.AddRange(PoleNeznamychDoListu(molarniKoncentrace, vratit.Count + pocatecnyIndex, chciINaindexovane));
 
             vratit.AddRange(PoleNeznamychDoListu(hmotnostniKoncentrace, vratit.Count + pocatecnyIndex, chciINaindexovane));
-
-            vratit.AddRange(PoleNeznamychDoListu(latkoveMnozstvi, vratit.Count + pocatecnyIndex, chciINaindexovane));
 
             vratit.AddRange(PoleNeznamychDoListu(pocetMolekul, vratit.Count + pocatecnyIndex, chciINaindexovane));
 
@@ -297,7 +301,7 @@ namespace BilancniVypocty
             return vratit;
         }
 
-        private List<Neznama> PoleNeznamychDoListu(Neznama[] nezname, int pocatecnyIndex, bool chciInaindexovane)
+        private List<Neznama> PoleNeznamychDoListu(Neznama[] nezname, int pocatecnyIndex, bool chciInaindexovane) // vrátí list neznámých z pole neznznámých a pokud chceme tak i naindexuje
         {
             List<Neznama> vratit = new List<Neznama>();
 
@@ -317,8 +321,10 @@ namespace BilancniVypocty
             return vratit;
         }
 
-        public void VnitroProudniRovnice(out List<float[]> linearniRovnice, out List<float> vysledkyLinearni, out List<float[]> nasobiciRovnice, out List<float> vysledkyNasobici)
+        public void VnitroProudniRovnice(out List<float[]> linearniRovnice, out List<float> vysledkyLinearni, out List<float[]> nasobiciRovnice, out List<float> vysledkyNasobici) // připraví rovnice které obsahují pouze složky z jednoho proudu
         {
+            // místo na uložení rovnic
+
             linearniRovnice = new List<float[]>();
 
             vysledkyLinearni = new List<float>();
@@ -534,7 +540,7 @@ namespace BilancniVypocty
             }
         }
 
-        public static float[] Summa(Neznama[] summa)
+        public static float[] Summa(Neznama[] summa) // funguje pro udělání rovnice jako summy neboli všem vloženým neznámým dá koeficient 1
         {
             float[] rovnice = new float[ReseniSoustavyRovnic.nezname.Length];
 
@@ -546,7 +552,7 @@ namespace BilancniVypocty
             return rovnice;
         }
 
-        public static float[] Summa(Neznama[] summa, float koeficient)
+        public static float[] Summa(Neznama[] summa, float koeficient) // podobné jako klasická summa jen se zde může nastavit jiný koeficient než 1
         {
             float[] rovnice = new float[ReseniSoustavyRovnic.nezname.Length];
 
@@ -558,7 +564,7 @@ namespace BilancniVypocty
             return rovnice;
         }
         
-        public static float[] SloucitRovnice(float[][] rovnice)
+        public static float[] SloucetRovnice(float[][] rovnice) // sečte 2 nebo více rovnic
         {
             float[] vyslednarovnice = new float[rovnice[0].Length]; 
 
@@ -573,7 +579,7 @@ namespace BilancniVypocty
             return vyslednarovnice;
         }
 
-        public static float[] Rovice(Neznama[] dosazovat, float[] koeficienty)
+        public static float[] Rovice(Neznama[] dosazovat, float[] koeficienty) // nastaví rovnici neznámých s určitými koeficienty (pole Neznámých a koeficientů musí být stejně dlouhé a není ošetřeno jelikož vztup jde pouze ode mě)
         {
             float[] rovnice = new float[ReseniSoustavyRovnic.nezname.Length];
 
@@ -585,24 +591,24 @@ namespace BilancniVypocty
             return rovnice;
         }
 
-        public static float[] Rovice()
+        public static float[] Rovice() // vrátí prázdné pole floatů o délce potřebné pro jednu rovnici
         {
             float[] rovnice = new float[ReseniSoustavyRovnic.nezname.Length];
 
             return rovnice;
         }
 
-        private static Neznama[] ZmenitDelku(Neznama[] puvodni, int novaDelka)
+        private static Neznama[] ZmenitDelku(Neznama[] puvodni, int novaDelka) // Změní délku pole držící neznámé pro složky proudu, když dojde k rozšíření
         {
             Neznama[] vratit = new Neznama[novaDelka];
 
             for (int i = 0; i < novaDelka; i++)
             {
-                if (i < puvodni.Length)
+                if (i < puvodni.Length) // pokud už existují tak přenesu dál (abych nerušil zadané hodnoty)
                 {
                     vratit[i] = puvodni[i];
                 }
-                else
+                else // pokud ne tak je nutno vytvořit po vzoru předchozího členu
                 {
                     vratit[i] = new Neznama(vratit[i - 1].max, vratit[i - 1].min, vratit[i - 1].jmeno, vratit[i - 1].jednotka, vratit[i - 1].indexProudu, i + 1);
                 }
@@ -611,27 +617,27 @@ namespace BilancniVypocty
             return vratit;
         }
 
-        private static Neznama[][] ZmenitDelkuProudu(Neznama[][] puvodni, int slozek, int proudy)
+        private static Neznama[][] ZmenitDelkuProudu(Neznama[][] puvodni, int slozek, int proudy) // změní délku polí při přenastavení počtu proudá či složek
         {
             Neznama[][] vratit = new Neznama[slozek][];
             for (int i = 0; i < slozek; i++)
             {
                 vratit[i] = new Neznama[proudy];
-                if (i < puvodni.Length)
+                if (i < puvodni.Length) // existuje
                 {
                     for (int j = 0; j < proudy; j++)
                     {
-                        if (j < puvodni[i].Length)
+                        if (j < puvodni[i].Length) // existuje
                         {
                             vratit[i][j] = puvodni[i][j];
                         }
-                        else
+                        else // vytvoř nový
                         {
                             vratit[i][j] = new Neznama(vratit[i][j - 1].max, vratit[i][j - 1].min, vratit[i][j - 1].jmeno, vratit[i][j - 1].jednotka, vratit[i][j - 1].indexProudu, i + 1);
                         }
                     }
                 }
-                else
+                else // vytvoř nový
                 {
                     for (int j = 0; j < proudy; j++)
                     {
@@ -643,7 +649,7 @@ namespace BilancniVypocty
             return vratit;
         }
 
-        public void Rozsirit(int slozek, int protiproudu)
+        public void Rozsirit(int slozek, int protiproudu) // inicializuje rozšíření
         {
             hmotnostiSlozek = ZmenitDelku(hmotnostiSlozek, slozek);
 
@@ -668,6 +674,8 @@ namespace BilancniVypocty
             koeficientDoJakehoProudu = ZmenitDelkuProudu(koeficientDoJakehoProudu, slozek, protiproudu);
 
             pomocnaKoeficientDoProudu = ZmenitDelkuProudu(pomocnaKoeficientDoProudu, slozek, protiproudu);
+
+            pomocnaLatkoveKoeficientDoProudu = ZmenitDelkuProudu(pomocnaKoeficientDoProudu, slozek, protiproudu);
 
             relativniMolarniZlomky = ZmenitDelku(relativniMolarniZlomky, slozek);
 

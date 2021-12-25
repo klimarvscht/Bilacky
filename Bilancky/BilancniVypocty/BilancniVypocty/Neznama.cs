@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace BilancniVypocty
 {
-    public class Neznama
+    public class Neznama // tato třída uchovává v sobě všechno potřebné o nějaké proměnné
     {
-        public int indexVPoli = -1;
-        public float max;
-        public float min;
-        public float value;
-        public bool known;
-        public string jmeno;
-        public string jednotka;
-        public int indexProudu;
-        public int indexSlozky;
-        public bool chciVypsat;
-        public bool pozeProPlyn;
+        public int indexVPoli = -1; // index v poli proměnných (-1 znamená, že není zařazen)
+        public float max; // maximální hodnota
+        public float min; // minimální hodnota
+        public float value; // hodnota aktuální
+        public bool known; // známe hodnotu danné proměnné
+        public string jmeno; //značka danné proměnné
+        public string jednotka; // jednotka
+        public int indexProudu; // v jakém proudu se daná proměnná nachází
+        public int indexSlozky; // jaké složky se danná neznámá týká (0 znamená celého proudu)
+        public bool chciVypsat; // jestli chci, aby uživatel viděl hodnoty
+        public bool pozeProPlyn; // jestli danná neznámá je duležitá pouze pro plyn
 
-        public Neznama(float maximum, float minimum, string jmeno, string jednotka, int indexProudu,int indexSlozky, bool chciVeVypisu, bool plyn)
+        public Neznama(float maximum, float minimum, string jmeno, string jednotka, int indexProudu,int indexSlozky, bool chciVeVypisu, bool plyn) // rozšířený konstruktor
         {
             this.max = maximum;
             this.min = minimum;
@@ -31,7 +31,8 @@ namespace BilancniVypocty
             known = false;
             chciVypsat = chciVeVypisu;
             pozeProPlyn = plyn;
-            if (minimum > 0)
+
+            if (minimum > 0) // aby byla hodnota mezi maximem a minimem (nikdy by nemělo nastat, aby toto bylo potřeba)
             {
                 value = minimum;
             }
@@ -41,7 +42,7 @@ namespace BilancniVypocty
             }
         }
 
-        public Neznama(float maximum, float minimum, string jmeno, string jednotka, int indexProudu, int indexSlozky)
+        public Neznama(float maximum, float minimum, string jmeno, string jednotka, int indexProudu, int indexSlozky) // krátký konstruktor
         {
             this.max = maximum;
             this.min = minimum;
@@ -62,11 +63,11 @@ namespace BilancniVypocty
             }
         }
 
-        public string GetName()
+        public string GetName() // nutno přidat i číslo složky
         {
             string name = jmeno;
 
-            if (indexSlozky != 0)
+            if (indexSlozky != 0) // jelikož nula je pro celý proud tak není nutno vypisovat
             {
                 name += Uzel.alpha[indexSlozky - 1];
             }

@@ -20,9 +20,6 @@ Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypoct
 Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.pdb
 Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.nastaveniSlozek.resources
 Z:\Documents\Visual Studio 2017\Projekty\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.Krmitko.resources
-D:\Programko\Visual Studio\Bilacky\Bilancky\BilancniVypocty\BilancniVypocty\bin\Debug\BilancniVypocty.exe.config
-D:\Programko\Visual Studio\Bilacky\Bilancky\BilancniVypocty\BilancniVypocty\bin\Debug\BilancniVypocty.exe
-D:\Programko\Visual Studio\Bilacky\Bilancky\BilancniVypocty\BilancniVypocty\bin\Debug\BilancniVypocty.pdb
 D:\Programko\Visual Studio\Bilacky\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.csprojAssemblyReference.cache
 D:\Programko\Visual Studio\Bilacky\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.Form1.resources
 D:\Programko\Visual Studio\Bilacky\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.Krmitko.resources
@@ -30,5 +27,8 @@ D:\Programko\Visual Studio\Bilacky\Bilancky\BilancniVypocty\BilancniVypocty\obj\
 D:\Programko\Visual Studio\Bilacky\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.Properties.Resources.resources
 D:\Programko\Visual Studio\Bilacky\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.csproj.GenerateResource.cache
 D:\Programko\Visual Studio\Bilacky\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.csproj.CoreCompileInputs.cache
-D:\Programko\Visual Studio\Bilacky\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.exe
-D:\Programko\Visual Studio\Bilacky\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\BilancniVypocty.pdb
+D:\Programko\Visual Studio\Bilacky\Bilancky\BilancniVypocty\BilancniVypocty\bin\Debug\Příprava roztoků.exe.config
+D:\Programko\Visual Studio\Bilacky\Bilancky\BilancniVypocty\BilancniVypocty\bin\Debug\Příprava roztoků.exe
+D:\Programko\Visual Studio\Bilacky\Bilancky\BilancniVypocty\BilancniVypocty\bin\Debug\Příprava roztoků.pdb
+D:\Programko\Visual Studio\Bilacky\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\Příprava roztoků.exe
+D:\Programko\Visual Studio\Bilacky\Bilancky\BilancniVypocty\BilancniVypocty\obj\Debug\Příprava roztoků.pdb

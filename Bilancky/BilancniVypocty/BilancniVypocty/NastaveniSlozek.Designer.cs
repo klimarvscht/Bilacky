@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(nastaveniSlozek));
             this.numPocetSlozek = new System.Windows.Forms.NumericUpDown();
             this.PocetSlozek = new System.Windows.Forms.Label();
             this.Ulozit = new System.Windows.Forms.Button();
@@ -156,6 +157,7 @@
             this.Controls.Add(this.PocetSlozek);
             this.Controls.Add(this.numPocetSlozek);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Name = "nastaveniSlozek";
             this.Text = "NastaveniSlozek";

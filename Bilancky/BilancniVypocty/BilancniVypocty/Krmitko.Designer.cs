@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Krmitko));
             this.nazev = new System.Windows.Forms.Label();
             this.zname = new System.Windows.Forms.Label();
             this.hodnota = new System.Windows.Forms.Label();
@@ -150,6 +151,7 @@
             this.Controls.Add(this.zname);
             this.Controls.Add(this.nazev);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Krmitko";
             this.Text = "Krmitko";

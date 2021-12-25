@@ -8,14 +8,14 @@ namespace BilancniVypocty
 {
     class Uzel
     {
-        public static char[] alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+        public static char[] alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray(); // abeceda
 
-        public static Uzel uzel;
+        public static Uzel uzel; // zde drží odkaz na jedinou instanci
 
-        public static List<Proud> celkemProudu = new List<Proud>();
+        public static List<Proud> celkemProudu = new List<Proud>(); // zde jsou drženy všechny proudy
 
-        public List<Proud> vztupniProudy = new List<Proud>();
-        public List<Proud> vystupniProudy = new List<Proud>();
+        public List<Proud> vztupniProudy = new List<Proud>(); // vztupní proudy uzle
+        public List<Proud> vystupniProudy = new List<Proud>(); // vystupní proudy uzle
         public static int slozek;
 
         public Uzel(int vztupneProudy, int vystupneProudy)
@@ -29,7 +29,7 @@ namespace BilancniVypocty
             uzel = this;
         }
 
-        private List<Proud> NastavProudy(int pocet, int pocetNaDruheStrane, int pocatecniIndex)
+        private List<Proud> NastavProudy(int pocet, int pocetNaDruheStrane, int pocatecniIndex) // inicializuje proudy a vrátí je
         {
             Proud[] proudy = new Proud[pocet];
             for (int i = 0; i < pocet; i++)
@@ -39,7 +39,7 @@ namespace BilancniVypocty
             return proudy.ToList();
         }
 
-        public void ExtrahujNezname()
+        public void ExtrahujNezname() // extrahuje neznámé z proudů a uloží je do pole
         {
             List<Neznama> nezname = new List<Neznama>();
 
@@ -56,7 +56,7 @@ namespace BilancniVypocty
             ReseniSoustavyRovnic.nezname = nezname.ToArray();
         }
 
-        public void ExtrahujRovnice()
+        public void ExtrahujRovnice() // extrahuje rovnice z proudů i rovnice mezi jednotlivými proudy
         {
             List<float[]> linearniMatice = new List<float[]>(), nasobiciMatice = new List<float[]>();
             List<float> rovnaseLinearni = new List<float>(), rovnaseNasobici = new List<float>();
@@ -94,7 +94,7 @@ namespace BilancniVypocty
             ReseniSoustavyRovnic.vysledkyNasobici = rovnaseNasobici.ToArray();
         }
 
-        private void CelkoveBilance(out List<float[]> linearniRovnice, out List<float> vysledkyLinearni, out List<float[]> nasobiciRovnice, out List<float> vysledkyNasobici)
+        private void CelkoveBilance(out List<float[]> linearniRovnice, out List<float> vysledkyLinearni, out List<float[]> nasobiciRovnice, out List<float> vysledkyNasobici) // rovnice mezi jednotlivými proudy (celkové bilance)
         {
             linearniRovnice = new List<float[]>();
             nasobiciRovnice = new List<float[]>();
@@ -177,11 +177,12 @@ namespace BilancniVypocty
             }
         }
 
-        private void NastavRovniceDoProudu(int slozka, List<Proud> zProudu, List<Proud> doProudu, List<float[]> linearniRovnice,  List<float> vysledkyLinearni,  List<float[]> nasobiciRovnice,  List<float> vysledkyNasobici)
+        private void NastavRovniceDoProudu(int slozka, List<Proud> zProudu, List<Proud> doProudu, List<float[]> linearniRovnice,  List<float> vysledkyLinearni,  List<float[]> nasobiciRovnice,  List<float> vysledkyNasobici) // rovnice obsahující doProudu
         {
             float[] podrzRovnici = Proud.Rovice();
             for (int j = 0; j < doProudu.Count; j++)
             {
+                // týkající se hmotností
                 podrzRovnici = Proud.Rovice();
                 foreach (Proud item in zProudu)
                 {
@@ -208,6 +209,7 @@ namespace BilancniVypocty
                 linearniRovnice.Add(podrzRovnici);
                 vysledkyLinearni.Add(0);
 
+                // týkající se látkového množství
                 podrzRovnici = Proud.Rovice();
                 foreach (Proud item in zProudu)
                 {
@@ -236,14 +238,14 @@ namespace BilancniVypocty
             }
         }
 
-        private List<Proud> Rozsirit(List<Proud> proudy, int novaDelka, int delkaDruheStrany)
+        private List<Proud> Rozsirit(List<Proud> proudy, int novaDelka, int delkaDruheStrany) // nastaví délku pole proudů na chtěnou délku
         {
             if (proudy.Count > novaDelka)
             {
                 int delka = proudy.Count;
                 for (int i = delka; i > novaDelka; i--)
                 {
-                    celkemProudu[proudy[i - 1].indexProudu] = null;
+                    celkemProudu[proudy[i - 1].indexProudu] = null; // nutno odstranit i z celkového seznamu proudů
                     proudy.RemoveAt(i - 1);
                 }
                 proudy.RemoveRange(novaDelka, proudy.Count - novaDelka);
@@ -259,7 +261,7 @@ namespace BilancniVypocty
             return proudy;
         }
 
-        public void RozsirProudy(int slozek, int vztup, int vyztup)
+        public void RozsirProudy(int slozek, int vztup, int vyztup) // nastaví délky polí na novou délku podle nastavení
         {
             foreach (Proud item in vystupniProudy)
             {
@@ -274,6 +276,14 @@ namespace BilancniVypocty
             vystupniProudy = Rozsirit(vystupniProudy, vyztup, vztup);
 
             vztupniProudy = Rozsirit(vztupniProudy, vztup, vyztup);
+        }
+
+        public static void PrenastavProudIndexy()
+        {
+            for (int i = 0; i < celkemProudu.Count; i++)
+            {
+                celkemProudu[i].indexProudu = i;
+            }
         }
     }
 }

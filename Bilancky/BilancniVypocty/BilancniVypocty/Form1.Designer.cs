@@ -110,6 +110,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnNastaveniSlozek);
             this.Controls.Add(this.schema);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Přípravy roztoků";
             this.Load += new System.EventHandler(this.Form1_Load);
