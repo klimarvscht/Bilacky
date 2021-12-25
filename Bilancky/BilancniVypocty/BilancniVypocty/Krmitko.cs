@@ -30,13 +30,20 @@ namespace BilancniVypocty
             this.Text = jmeno;
             Vygeneruj(indexik);
             FormClosing += Zaviracka;
+
+            proudik.ItemHeight = proudy.Length;
+            foreach (Proud item in proudy)
+            {
+                proudik.Items.Add("Proud: " + (item.indexProudu + 1));
+            }
+            proudik.SelectedIndex = 0;
         }
 
         private void Vygeneruj(int cisloProudu)
         {
             panel.Controls.Clear();
 
-            LabelProud.Text = "Proud: " + (proudy[cisloProudu].indexProudu + 1);
+            //proudik.Text = "Proud: " + (proudy[cisloProudu].indexProudu + 1);
 
             nezname = proudy[cisloProudu].NeznameDoListu(0, true).ToArray();
             List<CheckBox> boxy = new List<CheckBox>();
@@ -63,7 +70,9 @@ namespace BilancniVypocty
                 boxy.Add(NastavChkbox(odestup, i, nezname[i].known));
                 panel.Controls.Add(boxy[boxy.Count - 1]);
 
-                panel.Controls.Add(NastavLabel(odestup, i, nezname[i].GetName()));
+                panel.Controls.Add(NastavLabel(odestup, nazev.Location.X, i, nezname[i].GetName()));
+
+                panel.Controls.Add(NastavLabel(odestup, jednotka.Location.X, i, nezname[i].jednotka));
 
                 num.Add(NastavNumericUpDown(odestup, i, nezname[i].value, nezname[i].min, nezname[i].max, nezname[i]));
                 panel.Controls.Add(num[num.Count - 1]);
@@ -95,12 +104,12 @@ namespace BilancniVypocty
             return check;
         }
 
-        private Label NastavLabel(int odestup, int poradi, string jmeno)
+        private Label NastavLabel(int odestup, int xPos, int poradi, string text)
         {
             Label label = new Label();
-            label.Location = new Point(nazev.Location.X, odestup);
-            label.Name = "Jmeno" + poradi;
-            label.Text = jmeno;
+            label.Location = new Point(xPos, odestup);
+            label.Name = text + poradi;
+            label.Text = text;
 
             label.Show();
             return label;
@@ -188,6 +197,12 @@ namespace BilancniVypocty
         {
             e.Cancel = false;
             Form1.krmitko = null;
+        }
+
+        private void OnProudChanged(object sender, EventArgs e)
+        {
+            indexik = proudik.SelectedIndex;
+            Vygeneruj(indexik);
         }
     }
 }

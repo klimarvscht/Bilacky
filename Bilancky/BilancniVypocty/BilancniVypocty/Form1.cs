@@ -74,9 +74,11 @@ namespace BilancniVypocty
             Uzel.uzel.ExtrahujNezname();
             Uzel.uzel.ExtrahujRovnice();
 
-            ReseniSoustavyRovnic.VypisMaticiChytre(ReseniSoustavyRovnic.nasobiciMatice, ReseniSoustavyRovnic.vysledkyNasobici);
+            ReseniSoustavyRovnic.DosazeniDoRovnic();
 
-            ReseniSoustavyRovnic.VypisMaticiChytre(ReseniSoustavyRovnic.linearniMatice, ReseniSoustavyRovnic.vysledkyLinearni);
+            //ReseniSoustavyRovnic.VypisMaticiChytre(ReseniSoustavyRovnic.nasobiciMatice, ReseniSoustavyRovnic.vysledkyNasobici);
+
+            //ReseniSoustavyRovnic.VypisMaticiChytre(ReseniSoustavyRovnic.linearniMatice, ReseniSoustavyRovnic.vysledkyLinearni);
 
             LinearniCast();
             while (true)

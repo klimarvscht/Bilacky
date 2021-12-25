@@ -32,11 +32,12 @@
             this.zname = new System.Windows.Forms.Label();
             this.hodnota = new System.Windows.Forms.Label();
             this.panel = new System.Windows.Forms.Panel();
-            this.LabelProud = new System.Windows.Forms.Label();
             this.btnDalsiProud = new System.Windows.Forms.Button();
             this.btnPredchoziProud = new System.Windows.Forms.Button();
             this.plyn = new System.Windows.Forms.Label();
             this.chkPlyn = new System.Windows.Forms.CheckBox();
+            this.jednotka = new System.Windows.Forms.Label();
+            this.proudik = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // nazev
@@ -51,7 +52,7 @@
             // zname
             // 
             this.zname.AutoSize = true;
-            this.zname.Location = new System.Drawing.Point(181, 80);
+            this.zname.Location = new System.Drawing.Point(133, 80);
             this.zname.Name = "zname";
             this.zname.Size = new System.Drawing.Size(40, 13);
             this.zname.TabIndex = 2;
@@ -60,7 +61,7 @@
             // hodnota
             // 
             this.hodnota.AutoSize = true;
-            this.hodnota.Location = new System.Drawing.Point(319, 80);
+            this.hodnota.Location = new System.Drawing.Point(250, 80);
             this.hodnota.Name = "hodnota";
             this.hodnota.Size = new System.Drawing.Size(48, 13);
             this.hodnota.TabIndex = 3;
@@ -71,19 +72,8 @@
             this.panel.AutoScroll = true;
             this.panel.Location = new System.Drawing.Point(1, 96);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(493, 477);
+            this.panel.Size = new System.Drawing.Size(552, 477);
             this.panel.TabIndex = 4;
-            // 
-            // LabelProud
-            // 
-            this.LabelProud.AutoSize = true;
-            this.LabelProud.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.LabelProud.Location = new System.Drawing.Point(195, 26);
-            this.LabelProud.Name = "LabelProud";
-            this.LabelProud.Size = new System.Drawing.Size(62, 17);
-            this.LabelProud.TabIndex = 5;
-            this.LabelProud.Text = "proudik";
-            this.LabelProud.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnDalsiProud
             // 
@@ -125,16 +115,36 @@
             this.chkPlyn.UseVisualStyleBackColor = true;
             this.chkPlyn.CheckedChanged += new System.EventHandler(this.OnPlynChanged);
             // 
+            // jednotka
+            // 
+            this.jednotka.AutoSize = true;
+            this.jednotka.Location = new System.Drawing.Point(415, 80);
+            this.jednotka.Name = "jednotka";
+            this.jednotka.Size = new System.Drawing.Size(51, 13);
+            this.jednotka.TabIndex = 10;
+            this.jednotka.Text = "Jednotka";
+            // 
+            // proudik
+            // 
+            this.proudik.FormattingEnabled = true;
+            this.proudik.Location = new System.Drawing.Point(177, 22);
+            this.proudik.Name = "proudik";
+            this.proudik.Size = new System.Drawing.Size(121, 21);
+            this.proudik.TabIndex = 11;
+            this.proudik.Text = "proudik";
+            this.proudik.SelectedIndexChanged += new System.EventHandler(this.OnProudChanged);
+            // 
             // Krmitko
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(496, 572);
+            this.ClientSize = new System.Drawing.Size(552, 572);
+            this.Controls.Add(this.proudik);
+            this.Controls.Add(this.jednotka);
             this.Controls.Add(this.chkPlyn);
             this.Controls.Add(this.plyn);
             this.Controls.Add(this.btnPredchoziProud);
             this.Controls.Add(this.btnDalsiProud);
-            this.Controls.Add(this.LabelProud);
             this.Controls.Add(this.panel);
             this.Controls.Add(this.hodnota);
             this.Controls.Add(this.zname);
@@ -153,10 +163,11 @@
         private System.Windows.Forms.Label zname;
         private System.Windows.Forms.Label hodnota;
         private System.Windows.Forms.Panel panel;
-        private System.Windows.Forms.Label LabelProud;
         private System.Windows.Forms.Button btnDalsiProud;
         private System.Windows.Forms.Button btnPredchoziProud;
         private System.Windows.Forms.Label plyn;
         private System.Windows.Forms.CheckBox chkPlyn;
+        private System.Windows.Forms.Label jednotka;
+        private System.Windows.Forms.ComboBox proudik;
     }
 }
