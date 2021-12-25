@@ -14,12 +14,15 @@ namespace BilancniVypocty
         public static float[] vysledkyLinearni;
         public static float[] vysledkyNasobici;
 
-        public static void UpravaLinearniRovnice()
+        public static bool UpravaLinearniRovnice()
         {
             int skipnuto = 0;
 
+            bool staloSeNeco = false;
+
             for (int i = 0; i < linearniMatice[0].Length && i < linearniMatice.Length + skipnuto - 1; i++)
             {
+                staloSeNeco = ExthrahujHodnotyLinearni() || staloSeNeco;
                 int radek = VhodnySloupec(linearniMatice, i, i - skipnuto, 0);
 
                 if (radek == -1)
@@ -67,6 +70,9 @@ namespace BilancniVypocty
                 float[][] pomoc = linearniMatice;
                 Console.WriteLine();
             }
+
+            staloSeNeco = ExthrahujHodnotyLinearni() || staloSeNeco;
+            return staloSeNeco;
         }
 
         public static bool ExthrahujHodnotyLinearni()
@@ -82,6 +88,10 @@ namespace BilancniVypocty
                     int posledniNeznama;
                     if (NeznamychVRovnici(linearniMatice[i], out posledniNeznama) == 1)
                     {
+                        if (nezname[posledniNeznama].known)
+                        {
+                            continue;
+                        }
                         nezname[posledniNeznama].value = vysledkyLinearni[i] / linearniMatice[i][posledniNeznama];
                         nezname[posledniNeznama].known = true;
 
@@ -108,8 +118,6 @@ namespace BilancniVypocty
                 if (nezname[i].known)
                 {
                     DosazeniNeznameLinearni(i);
-
-                    Console.WriteLine("nefachám");
                 }
             }
         }
@@ -123,14 +131,18 @@ namespace BilancniVypocty
             }
         }
 
-        public static void UpravaNasobneRovnice()
+        public static bool UpravaNasobneRovnice()
         {
             int skipnuto = 0;
 
             int rovnaSeNula = 0;
 
+            bool staloSeNeco = false;
+
             for (int i = 0; i < nasobiciMatice[0].Length && i < nasobiciMatice.Length + skipnuto - rovnaSeNula; i++)
             {
+                staloSeNeco = ExtrahujHodnotyNasobiciRovnice() || staloSeNeco;
+
                 int radek = VhodnySloupec(nasobiciMatice, i, i - skipnuto, rovnaSeNula);
 
                 if (radek == -1)
@@ -181,6 +193,10 @@ namespace BilancniVypocty
                     VyhazejZaporneHodnotyZNasobiciRovnice(nasobiciMatice.Length - k);
                 }
             }
+
+            staloSeNeco = ExtrahujHodnotyNasobiciRovnice() || staloSeNeco;
+
+            return staloSeNeco;
         }
 
         public static bool ExtrahujHodnotyNasobiciRovnice()
@@ -218,8 +234,6 @@ namespace BilancniVypocty
                         necoSeStalo = true;
                     }
                 }
-
-                Console.WriteLine("While true");
             } while (necoSeStalo);
 
             return upraveno;
@@ -303,6 +317,36 @@ namespace BilancniVypocty
             }
         }
 
+        public static void DosazeniDoRovnic()
+        {
+            LinDosazeniDoRovnic();
+
+            while (true)
+            {
+                if (!NasDosazeniDoRovnic())
+                {
+                    break;
+                }
+
+                if (LinDosazeniDoRovnic())
+                {
+                    break;
+                }
+            }
+        }
+
+        private static bool LinDosazeniDoRovnic()
+        {
+            ReseniSoustavyRovnic.PredPripravLinearni();
+            return ReseniSoustavyRovnic.ExthrahujHodnotyLinearni();
+        }
+
+        private static bool NasDosazeniDoRovnic()
+        {
+            ReseniSoustavyRovnic.PredPripravNasobici();
+            return ReseniSoustavyRovnic.ExtrahujHodnotyNasobiciRovnice();
+        }
+
         public static void VypisMatici(float[][] matice, float[] hodnoty)
         {
             Console.WriteLine();
@@ -311,6 +355,37 @@ namespace BilancniVypocty
                 for (int j = 0; j < matice[i].Length; j++)
                 {
                     Console.Write(matice[i][j] + "; ");
+                }
+                Console.WriteLine("= " + hodnoty[i]);
+            }
+
+            Console.WriteLine();
+        }
+
+        public static void VypisMaticiChytre(float[][] matice, float[] hodnoty)
+        {
+            Console.WriteLine();
+            for (int i = 0; i < matice.Length; i++)
+            {
+                for (int j = 0; j < matice[i].Length; j++)
+                {
+                    if (matice[i][j] != 0)
+                    {
+                        Console.Write(matice[i][j] + " " + nezname[j].GetName());
+
+                        if (matice == nasobiciMatice)
+                        {
+                            Console.Write(" * ");
+                        }
+                        else if (matice == linearniMatice)
+                        {
+                            Console.Write(" + ");
+                        }
+                        else
+                        {
+                            Console.Write("; ");
+                        }
+                    }
                 }
                 Console.WriteLine("= " + hodnoty[i]);
             }

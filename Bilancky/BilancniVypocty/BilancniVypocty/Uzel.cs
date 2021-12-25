@@ -20,11 +20,11 @@ namespace BilancniVypocty
 
         public Uzel(int vztupneProudy, int vystupneProudy)
         {
-            vystupniProudy = NastavProudy(vystupneProudy, vztupneProudy, celkemProudu.Count);
-            celkemProudu.AddRange(vystupniProudy);
-
             vztupniProudy = NastavProudy(vztupneProudy, vystupneProudy, celkemProudu.Count);
             celkemProudu.AddRange(vztupniProudy);
+
+            vystupniProudy = NastavProudy(vystupneProudy, vztupneProudy, celkemProudu.Count);
+            celkemProudu.AddRange(vystupniProudy);
 
             uzel = this;
         }
@@ -207,6 +207,32 @@ namespace BilancniVypocty
 
                 linearniRovnice.Add(podrzRovnici);
                 vysledkyLinearni.Add(0);
+
+                podrzRovnici = Proud.Rovice();
+                foreach (Proud item in zProudu)
+                {
+                    podrzRovnici = Proud.Rovice();
+                    podrzRovnici[item.koeficientDoJakehoProudu[slozka][j].indexVPoli] = 1;
+
+                    podrzRovnici[item.latkoveMnozstvi[slozka].indexVPoli] = 1;
+
+                    podrzRovnici[item.pomocnaLatkoveKoeficientDoProudu[slozka][j].indexVPoli] = -1;
+
+                    nasobiciRovnice.Add(podrzRovnici);
+                    vysledkyNasobici.Add(1);
+                }
+
+                podrzRovnici = Proud.Rovice();
+
+                foreach (Proud item in zProudu)
+                {
+                    podrzRovnici[item.pomocnaLatkoveKoeficientDoProudu[slozka][j].indexVPoli] = 1;
+                }
+
+                podrzRovnici[doProudu[j].hmotnostiSlozek[slozka].indexVPoli] = -1;
+
+                linearniRovnice.Add(podrzRovnici);
+                vysledkyLinearni.Add(0);
             }
         }
 
@@ -220,7 +246,7 @@ namespace BilancniVypocty
                     celkemProudu[proudy[i - 1].indexProudu] = null;
                     proudy.RemoveAt(i - 1);
                 }
-                proudy.RemoveRange(novaDelka, proudy.Count);
+                proudy.RemoveRange(novaDelka, proudy.Count - novaDelka);
             }
             else
             {

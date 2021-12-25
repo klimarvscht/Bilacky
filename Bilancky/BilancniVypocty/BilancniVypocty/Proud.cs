@@ -81,6 +81,8 @@ namespace BilancniVypocty
 
         public Neznama[][] pomocnaKoeficientDoProudu;
 
+        public Neznama[][] pomocnaLatkoveKoeficientDoProudu;
+
         public Proud(int slozek, int prouduNaDruheStrane, int indexProudu)
         {
             this.indexProudu = indexProudu;
@@ -125,6 +127,8 @@ namespace BilancniVypocty
             koeficientDoJakehoProudu = NastavDoProudu(slozek, prouduNaDruheStrane);
 
             pomocnaKoeficientDoProudu = NastavDoProudu(slozek, prouduNaDruheStrane, false);
+
+            pomocnaLatkoveKoeficientDoProudu = NastavDoProudu(slozek, prouduNaDruheStrane, false);
 
             relativniMolarniZlomky = NastavPoleNeznamych(slozek, (float)(decimal.MaxValue * (decimal)0.99), 0, "X", "1");
 
@@ -204,22 +208,22 @@ namespace BilancniVypocty
         {
             List<Neznama> vratit = new List<Neznama>();
 
-            celkovaHmotnost.indexVPoli = vratit.Count;
+            celkovaHmotnost.indexVPoli = vratit.Count + pocatecnyIndex;
             vratit.Add(celkovaHmotnost);
 
-            hustota.indexVPoli = vratit.Count;
+            hustota.indexVPoli = vratit.Count + pocatecnyIndex;
             vratit.Add(hustota);
 
-            objem.indexVPoli = vratit.Count;
+            objem.indexVPoli = vratit.Count + pocatecnyIndex;
             vratit.Add(objem);
 
-            molarniHmotnostSmesi.indexVPoli = vratit.Count;
+            molarniHmotnostSmesi.indexVPoli = vratit.Count + pocatecnyIndex;
             vratit.Add(molarniHmotnostSmesi);
 
-            celkemMolu.indexVPoli = vratit.Count;
+            celkemMolu.indexVPoli = vratit.Count + pocatecnyIndex;
             vratit.Add(celkemMolu);
 
-            pomocnaCelkovaSummaProVypocetmolarnichZlomku.indexVPoli = vratit.Count;
+            pomocnaCelkovaSummaProVypocetmolarnichZlomku.indexVPoli = vratit.Count + pocatecnyIndex;
             vratit.Add(pomocnaCelkovaSummaProVypocetmolarnichZlomku);
 
             vratit.AddRange(PoleNeznamychDoListu(hmotnostiSlozek, vratit.Count + pocatecnyIndex, chciINaindexovane));
@@ -270,6 +274,11 @@ namespace BilancniVypocty
             }
 
             foreach (Neznama[] item in pomocnaKoeficientDoProudu)
+            {
+                vratit.AddRange(PoleNeznamychDoListu(item, vratit.Count + pocatecnyIndex, chciINaindexovane));
+            }
+
+            foreach (Neznama[] item in pomocnaLatkoveKoeficientDoProudu)
             {
                 vratit.AddRange(PoleNeznamychDoListu(item, vratit.Count + pocatecnyIndex, chciINaindexovane));
             }
