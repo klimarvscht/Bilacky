@@ -131,8 +131,7 @@ namespace BilancniVypocty
             }
             catch // debug
             {
-                MessageBox.Show(neznama.GetName() + " = " + value + " minimum of this is " + min + " maximum is " + max, "Out of boundaries", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                   
+                num.Value = num.Minimum;
             }
             num.DecimalPlaces = 7; 
             num.ValueChanged += OnNumChanged;

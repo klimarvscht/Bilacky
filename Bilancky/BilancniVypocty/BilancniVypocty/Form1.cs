@@ -75,6 +75,7 @@ namespace BilancniVypocty
                 btnNastaveniSlozek.Enabled = false;
                 vztup.Enabled = false;
                 vyztup.Enabled = false;
+                resetBTN.Enabled = false;
                 pocitam = true;
 
                 // získám neznámé a rovnice
@@ -101,6 +102,8 @@ namespace BilancniVypocty
                     }
                 }
 
+                Kontrola(); // zkontroluje jestli jsou hodnoty vrámci mezí
+
                 ReseniSoustavyRovnic.RESET(); // nastavím vše na původní stav se zachovanými výsledky
 
                 pocitam = false;
@@ -108,6 +111,7 @@ namespace BilancniVypocty
                 btnNastaveniSlozek.Enabled = true;
                 vztup.Enabled = true;
                 vyztup.Enabled = true;
+                resetBTN.Enabled = true;
             }
             else
             {
@@ -125,6 +129,34 @@ namespace BilancniVypocty
         {
             ReseniSoustavyRovnic.PredPripravNasobici();
             return ReseniSoustavyRovnic.UpravaNasobneRovnice();
+        }
+
+        private void resetBTN_Click(object sender, EventArgs e)
+        {
+            if (nastaveni == null && krmitko == null && !pocitam)
+            {
+                Uzel uzlik = new Uzel(Uzel.uzel.vztupniProudy.Count, Uzel.uzel.vystupniProudy.Count); // vyresetuje obsah všech proudů jelikož se znovu
+            }
+            else
+            {
+                MessageBox.Show("Nelze udělat během provádějí jiné akce.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+            }
+        }
+
+        public static void Kontrola()
+        {
+            foreach (Neznama item in ReseniSoustavyRovnic.nezname)
+            {
+                if (!item.known)
+                {
+                    continue;
+                }
+
+                if (item.value > item.max || item.value < item.min)
+                {
+                    MessageBox.Show("Hodnota " + item.GetName() + " je mimo hranice možných hodnot" + Environment.NewLine + "Hodnota je " + item.value + ")", "out of bounds", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                }
+            }
         }
     }
 }

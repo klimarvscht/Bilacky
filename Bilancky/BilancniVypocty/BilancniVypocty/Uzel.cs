@@ -282,7 +282,14 @@ namespace BilancniVypocty
         {
             for (int i = 0; i < celkemProudu.Count; i++)
             {
-                celkemProudu[i].indexProudu = i;
+                if (celkemProudu[i] == null)
+                {
+                    celkemProudu.RemoveAt(i);
+                }
+                else
+                {
+                    celkemProudu[i].indexProudu = i;
+                }
             }
         }
     }

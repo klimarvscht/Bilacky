@@ -45,7 +45,7 @@
             // 
             this.numPocetSlozek.Location = new System.Drawing.Point(162, 7);
             this.numPocetSlozek.Maximum = new decimal(new int[] {
-            10,
+            6,
             0,
             0,
             0});
@@ -58,7 +58,7 @@
             this.numPocetSlozek.Size = new System.Drawing.Size(38, 20);
             this.numPocetSlozek.TabIndex = 0;
             this.numPocetSlozek.Value = new decimal(new int[] {
-            10,
+            6,
             0,
             0,
             0});
@@ -95,7 +95,7 @@
             // 
             this.numVztupProud.Location = new System.Drawing.Point(162, 70);
             this.numVztupProud.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -108,7 +108,7 @@
             this.numVztupProud.Size = new System.Drawing.Size(38, 20);
             this.numVztupProud.TabIndex = 3;
             this.numVztupProud.Value = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -126,7 +126,7 @@
             // 
             this.numVystoupProud.Location = new System.Drawing.Point(162, 123);
             this.numVystoupProud.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -139,7 +139,7 @@
             this.numVystoupProud.Size = new System.Drawing.Size(38, 20);
             this.numVystoupProud.TabIndex = 5;
             this.numVystoupProud.Value = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
