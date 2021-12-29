@@ -20,21 +20,31 @@ namespace BilancniVypocty
 
         public Uzel(int vztupneProudy, int vystupneProudy)
         {
-            vztupniProudy = NastavProudy(vztupneProudy, vystupneProudy, celkemProudu.Count);
+            uzel = this;
+
+            vztupniProudy = NastavProudy(vztupneProudy, celkemProudu.Count);
             celkemProudu.AddRange(vztupniProudy);
 
-            vystupniProudy = NastavProudy(vystupneProudy, vztupneProudy, celkemProudu.Count);
+            vystupniProudy = NastavProudy(vystupneProudy, celkemProudu.Count);
             celkemProudu.AddRange(vystupniProudy);
 
-            uzel = this;
+            foreach (Proud item in vystupniProudy)
+            {
+                item.NastavNezname(slozek, vztupneProudy);
+            }
+
+            foreach (Proud item in this.vztupniProudy)
+            {
+                item.NastavNezname(slozek, vystupneProudy);
+            }
         }
 
-        private List<Proud> NastavProudy(int pocet, int pocetNaDruheStrane, int pocatecniIndex) // inicializuje proudy a vrátí je
+        private List<Proud> NastavProudy(int pocet, int pocatecniIndex) // inicializuje proudy a vrátí je
         {
             Proud[] proudy = new Proud[pocet];
             for (int i = 0; i < pocet; i++)
             {
-                proudy[i] = new Proud(slozek, pocetNaDruheStrane, i + pocatecniIndex);
+                proudy[i] = new Proud(i + pocatecniIndex);
             }
             return proudy.ToList();
         }
@@ -254,7 +264,7 @@ namespace BilancniVypocty
             {
                 for (int i = proudy.Count; i < novaDelka; i++)
                 {
-                    proudy.Add(new Proud(slozek, delkaDruheStrany, celkemProudu.Count));
+                    proudy.Add(new Proud(celkemProudu.Count));
                     celkemProudu.Add(proudy[proudy.Count - 1]);
                 }
             }
@@ -263,22 +273,36 @@ namespace BilancniVypocty
 
         public void RozsirProudy(int slozek, int vztup, int vyztup) // nastaví délky polí na novou délku podle nastavení
         {
-            foreach (Proud item in vystupniProudy)
-            {
-                item.Rozsirit(slozek, vztup);
-            }
-
-            foreach (Proud item in vztupniProudy)
-            {
-                item.Rozsirit(slozek, vyztup);
-            }
+            int puvodniVztup = vztupniProudy.Count;
+            int puvodniVystup = vystupniProudy.Count;
 
             vystupniProudy = Rozsirit(vystupniProudy, vyztup, vztup);
 
             vztupniProudy = Rozsirit(vztupniProudy, vztup, vyztup);
+            // nadefinuj nové
+            for (int i = puvodniVystup; i < vystupniProudy.Count; i++)
+            {
+                vystupniProudy[i].NastavNezname(slozek, vztupniProudy.Count);
+            }
+
+            for (int i = puvodniVztup; i < vztupniProudy.Count; i++)
+            {
+                vztupniProudy[i].NastavNezname(slozek, vystupniProudy.Count);
+            }
+
+            // předefinuj staré
+            for (int i = 0; i < puvodniVystup; i++)
+            {
+                vystupniProudy[i].Rozsirit(slozek, vztup);
+            }
+
+            for (int i = 0; i < puvodniVztup; i++)
+            {
+                vztupniProudy[i].Rozsirit(slozek, vyztup);
+            }
         }
 
-        public static void PrenastavProudIndexy()
+        public static void PrenastavProudIndexy() // nastaví odpovídající index v poli proudů
         {
             for (int i = 0; i < celkemProudu.Count; i++)
             {

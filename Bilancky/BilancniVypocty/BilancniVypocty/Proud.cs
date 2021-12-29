@@ -85,15 +85,19 @@ namespace BilancniVypocty
 
         public Neznama[][] pomocnaLatkoveKoeficientDoProudu;
 
-        public Proud(int slozek, int prouduNaDruheStrane, int indexProudu)
+        public Proud(int indexProudu)
         {
             this.indexProudu = indexProudu;
-            
+            plyn = false;
+        }
+
+        public void NastavNezname(int slozek, int prouduNaDruheStrane)
+        {
             // definice Neznama
 
             celkovaHmotnost = new Neznama((float)(decimal.MaxValue * (decimal)0.99), 0, "m", "kg", indexProudu, 0); // slozka 0 - celkova proudu
 
-            hustota = new Neznama((float)(decimal.MaxValue * (decimal) 0.99), 0, "ϱ", "kg*m^(-3)", indexProudu, 0);
+            hustota = new Neznama((float)(decimal.MaxValue * (decimal)0.99), 0, "ϱ", "kg*m^(-3)", indexProudu, 0);
 
             objem = new Neznama((float)(decimal.MaxValue * (decimal)0.99), 0, "V", "m^3", indexProudu, 0);
 
@@ -105,13 +109,13 @@ namespace BilancniVypocty
 
             teplota = new Neznama((float)(decimal.MaxValue * (decimal)0.99), 0, "T", "K", indexProudu, 0, true, true);
 
-            hmotnostiSlozek = NastavPoleNeznamych( slozek, (float)(decimal.MaxValue * (decimal)0.99), 0, "m", "kg");
+            hmotnostiSlozek = NastavPoleNeznamych(slozek, (float)(decimal.MaxValue * (decimal)0.99), 0, "m", "kg");
 
             relativnihmotnostniZlomky = NastavPoleNeznamych(slozek, (float)(decimal.MaxValue * (decimal)0.99), 0, "W", "1");
-            
+
             hmotnostniZlomky = NastavPoleNeznamych(slozek, 1, 0, "w", "1");
 
-            molarniZlomky = NastavPoleNeznamych( slozek, 1, 0, "x", "1");
+            molarniZlomky = NastavPoleNeznamych(slozek, 1, 0, "x", "1");
 
             relativnihmotnostniZlomky = NastavPoleNeznamych(slozek, (float)(decimal.MaxValue * (decimal)0.99), 0, "W", "1");
 
@@ -136,7 +140,7 @@ namespace BilancniVypocty
 
             relativniMolarniZlomky = NastavPoleNeznamych(slozek, (float)(decimal.MaxValue * (decimal)0.99), 0, "X", "1");
 
-            objemJednotlivychLatek = NastavPoleNeznamych(slozek , (float)(decimal.MaxValue * (decimal)0.99), 0, "V","m^3");
+            objemJednotlivychLatek = NastavPoleNeznamych(slozek, (float)(decimal.MaxValue * (decimal)0.99), 0, "V", "m^3");
 
             relativniObjemovaKoncentrace = NastavPoleNeznamych(slozek, (float)(decimal.MaxValue * (decimal)0.99), 0, "Vol", "1");
 
@@ -157,8 +161,6 @@ namespace BilancniVypocty
             parcialniTlak = NastavPoleNeznamych(slozek, (float)(decimal.MaxValue * (decimal)0.99), 0, "pi", "Pa", false, true);
 
             hustotaSlozky = NastavPoleNeznamych(slozek, (float)(decimal.MaxValue * (decimal)0.99), 0, "ϱ", "kg*m^(-3)");
-
-            plyn = false;
         }
 
         private Neznama[] NastavPoleNeznamych(int pocetSlozek, float maximum, float minimum, string jmeno, string jednotka) // nastavení pole neznámých
@@ -193,6 +195,9 @@ namespace BilancniVypocty
         private Neznama[][] NastavDoProudu(int pocetSlozek, int pocetProudu, bool chciVypsat) // nastaví Neznámé do Proudu
         {
             Neznama[][] pomocna = new Neznama[pocetSlozek][];
+
+            Proud[] protejsiProudy = ProtejsiProudy(indexProudu);
+
             for (int i = 0; i < pocetSlozek; i++)
             {
                 pomocna[i] = new Neznama[pocetProudu];
@@ -201,11 +206,24 @@ namespace BilancniVypocty
             {
                 for (int j = 0; j < pocetProudu; j++)
                 {
-                    pomocna[i][j] = new Neznama(1, 0, indexProudu + "->", "1", j, i, chciVypsat, false);
+                    pomocna[i][j] = new Neznama(1, 0, "->", "1", j, i + 1, chciVypsat, false, protejsiProudy[j]);
                 }
             }
 
             return pomocna;
+        }
+
+        private static Proud[] ProtejsiProudy(int indexProudu) // pošli protější proudy
+        {
+            foreach (Proud item in Uzel.uzel.vystupniProudy)
+            {
+                if (item.indexProudu == indexProudu)
+                {
+                    return Uzel.uzel.vztupniProudy.ToArray();
+                }
+            }
+
+            return Uzel.uzel.vystupniProudy.ToArray(); // pokud není tam tak je tady
         }
 
         public List<Neznama> NeznameDoListu(int pocatecnyIndex, bool chciINaindexovane) // vrátí všechny neznámé z proudu a pokud chceme tak je i naindexuje
@@ -262,7 +280,7 @@ namespace BilancniVypocty
 
             vratit.AddRange(PoleNeznamychDoListu(relativniObjemovaKoncentrace, vratit.Count + pocatecnyIndex, chciINaindexovane));
 
-            vratit.AddRange(PoleNeznamychDoListu(pomocnaRelativniObjemovaKoncentrace, vratit.Count + pocatecnyIndex, chciINaindexovane));
+            vratit.AddRange(PoleNeznamychDoListu(pomocnaRelativniObjemovaKoncentrace, vratit.Count + pocatecnyIndex, chciINaindexovane)); // už mě nebaví komentovat
 
             vratit.AddRange(PoleNeznamychDoListu(pomocnyRelativniMolarniZlomek, vratit.Count + pocatecnyIndex, chciINaindexovane));
 
@@ -610,18 +628,24 @@ namespace BilancniVypocty
                 }
                 else // pokud ne tak je nutno vytvořit po vzoru předchozího členu
                 {
-                    vratit[i] = new Neznama(vratit[i - 1].max, vratit[i - 1].min, vratit[i - 1].jmeno, vratit[i - 1].jednotka, vratit[i - 1].indexProudu, i + 1);
+                    vratit[i] = new Neznama(vratit[i - 1].max, vratit[i - 1].min, vratit[i - 1].jmeno, vratit[i - 1].jednotka, vratit[i - 1].indexProudu, i + 1, vratit[i - 1].chciVypsat, vratit[i - 1].pozeProPlyn);
                 }
             }
 
             return vratit;
         }
 
-        private static Neznama[][] ZmenitDelkuProudu(Neznama[][] puvodni, int slozek, int proudy) // změní délku polí při přenastavení počtu proudá či složek
+        private static Neznama[][] ZmenitDelkuProudu(Neznama[][] puvodni, int slozek, int proudy, int indexProudu) // změní délku polí při přenastavení počtu proudá či složek
         {
             Neznama[][] vratit = new Neznama[slozek][];
+
+            Proud[] protejsiProudy = ProtejsiProudy(indexProudu);
+            List<Proud> protejsiProudyCopy = new List<Proud>();
+
             for (int i = 0; i < slozek; i++)
             {
+                protejsiProudyCopy.AddRange(protejsiProudy);
+
                 vratit[i] = new Neznama[proudy];
                 if (i < puvodni.Length) // existuje
                 {
@@ -630,10 +654,12 @@ namespace BilancniVypocty
                         if (j < puvodni[i].Length) // existuje
                         {
                             vratit[i][j] = puvodni[i][j];
+                            protejsiProudyCopy.Remove(puvodni[i][j].doProudu);
                         }
                         else // vytvoř nový
                         {
-                            vratit[i][j] = new Neznama(vratit[i][j - 1].max, vratit[i][j - 1].min, vratit[i][j - 1].jmeno, vratit[i][j - 1].jednotka, vratit[i][j - 1].indexProudu, i + 1);
+                            vratit[i][j] = new Neznama(vratit[i][j - 1].max, vratit[i][j - 1].min, vratit[i][j - 1].jmeno, vratit[i][j - 1].jednotka, vratit[i][j - 1].indexProudu, i + 1, vratit[i][j - 1].chciVypsat, vratit[i][j - 1].pozeProPlyn, protejsiProudyCopy[0]);
+                            protejsiProudyCopy.RemoveAt(0);
                         }
                     }
                 }
@@ -641,7 +667,8 @@ namespace BilancniVypocty
                 {
                     for (int j = 0; j < proudy; j++)
                     {
-                        vratit[i][j] = new Neznama(vratit[i - 1][j].max, vratit[i - 1][j].min, vratit[i - 1][j].jmeno, vratit[i - 1][j].jednotka, vratit[i - 1][j].indexProudu, i + 1);
+                        vratit[i][j] = new Neznama(vratit[i - 1][j].max, vratit[i - 1][j].min, vratit[i - 1][j].jmeno, vratit[i - 1][j].jednotka, vratit[i - 1][j].indexProudu, i + 1, vratit[i - 1][j].chciVypsat, vratit[i - 1][j].pozeProPlyn, protejsiProudyCopy[0]);
+                        protejsiProudyCopy.RemoveAt(0);
                     }
                 }
             }
@@ -671,11 +698,11 @@ namespace BilancniVypocty
             
             molarniHmotnost = ZmenitDelku(molarniHmotnost, slozek);
 
-            koeficientDoJakehoProudu = ZmenitDelkuProudu(koeficientDoJakehoProudu, slozek, protiproudu);
+            koeficientDoJakehoProudu = ZmenitDelkuProudu(koeficientDoJakehoProudu, slozek, protiproudu, indexProudu);
 
-            pomocnaKoeficientDoProudu = ZmenitDelkuProudu(pomocnaKoeficientDoProudu, slozek, protiproudu);
+            pomocnaKoeficientDoProudu = ZmenitDelkuProudu(pomocnaKoeficientDoProudu, slozek, protiproudu, indexProudu);
 
-            pomocnaLatkoveKoeficientDoProudu = ZmenitDelkuProudu(pomocnaKoeficientDoProudu, slozek, protiproudu);
+            pomocnaLatkoveKoeficientDoProudu = ZmenitDelkuProudu(pomocnaKoeficientDoProudu, slozek, protiproudu, indexProudu);
 
             relativniMolarniZlomky = ZmenitDelku(relativniMolarniZlomky, slozek);
 
