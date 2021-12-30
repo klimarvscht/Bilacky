@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace BilancniVypocty
 {
@@ -78,35 +79,9 @@ namespace BilancniVypocty
                 resetBTN.Enabled = false;
                 pocitam = true;
 
-                // získám neznámé a rovnice
-                Uzel.uzel.ExtrahujNezname();
-                Uzel.uzel.ExtrahujRovnice();
+                Thread vypocet = new Thread(Vypocty); // aby aplikace odpovídala
+                vypocet.Start();
 
-                // pokusím se získat co nejvíce pouhým dosazením
-                ReseniSoustavyRovnic.DosazeniDoRovnic();
-
-                // pokusím si pomoc gausovou metodou
-                LinearniCast();
-                while (true) // dělám dokud se něco zjišťuje
-                {
-                    // zkusím i úpravu násobné rovnice
-                    if (!NasobiciCast())
-                    {
-                        break;
-                    }
-
-                    
-                    if (!LinearniCast())
-                    {
-                        break;
-                    }
-                }
-
-                Kontrola(); // zkontroluje jestli jsou hodnoty vrámci mezí
-
-                ReseniSoustavyRovnic.RESET(); // nastavím vše na původní stav se zachovanými výsledky
-
-                pocitam = false;
                 Vypocet.Enabled = true;
                 btnNastaveniSlozek.Enabled = true;
                 vztup.Enabled = true;
@@ -119,13 +94,48 @@ namespace BilancniVypocty
             }
         }
 
-        private bool LinearniCast() // Gausova eliminace
+        public static void Vypocty()
+        {
+            pocitam = true;
+
+            // získám neznámé a rovnice
+            Uzel.uzel.ExtrahujNezname();
+            Uzel.uzel.ExtrahujRovnice();
+
+            // pokusím se získat co nejvíce pouhým dosazením
+            ReseniSoustavyRovnic.DosazeniDoRovnic();
+
+            // pokusím si pomoc gausovou metodou
+            LinearniCast();
+            while (true) // dělám dokud se něco zjišťuje
+            {
+                // zkusím i úpravu násobné rovnice
+                if (!NasobiciCast())
+                {
+                    break;
+                }
+
+
+                if (!LinearniCast())
+                {
+                    break;
+                }
+            }
+
+            Kontrola(); // zkontroluje jestli jsou hodnoty vrámci mezí
+
+            ReseniSoustavyRovnic.RESET(); // nastavím vše na původní stav se zachovanými výsledky
+
+            pocitam = false;
+        }
+
+        private static bool LinearniCast() // Gausova eliminace
         {
             ReseniSoustavyRovnic.PredPripravLinearni();
             return ReseniSoustavyRovnic.UpravaLinearniRovnice();
         }
 
-        private bool NasobiciCast() // metoda pro úpravu násobící rovnice
+        private static bool NasobiciCast() // metoda pro úpravu násobící rovnice
         {
             ReseniSoustavyRovnic.PredPripravNasobici();
             return ReseniSoustavyRovnic.UpravaNasobneRovnice();

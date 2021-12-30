@@ -81,7 +81,7 @@
             // 
             // Vypocet
             // 
-            this.Vypocet.Location = new System.Drawing.Point(161, 227);
+            this.Vypocet.Location = new System.Drawing.Point(161, 214);
             this.Vypocet.Name = "Vypocet";
             this.Vypocet.Size = new System.Drawing.Size(75, 23);
             this.Vypocet.TabIndex = 4;

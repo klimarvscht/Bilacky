@@ -291,12 +291,12 @@ namespace BilancniVypocty
             }
 
             // předefinuj staré
-            for (int i = 0; i < puvodniVystup; i++)
+            for (int i = 0; i < puvodniVystup && i < vystupniProudy.Count; i++)
             {
                 vystupniProudy[i].Rozsirit(slozek, vztup);
             }
 
-            for (int i = 0; i < puvodniVztup; i++)
+            for (int i = 0; i < puvodniVztup && i < vztupniProudy.Count; i++)
             {
                 vztupniProudy[i].Rozsirit(slozek, vyztup);
             }
