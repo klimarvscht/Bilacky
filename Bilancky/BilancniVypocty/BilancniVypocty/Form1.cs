@@ -16,6 +16,8 @@ namespace BilancniVypocty
         public static nastaveniSlozek nastaveni = null; // udržuje odkaz na nastavení složek
         public static Krmitko krmitko = null; // udržuje odkaz na krmítko
         public static bool pocitam = false; // probíhají výpočty?
+        
+        private static List<Button> buttony =  new List<Button>();
 
         public Form1()
         {
@@ -26,6 +28,12 @@ namespace BilancniVypocty
         {
             Uzel.slozek = 3;
             Uzel uzlik = new Uzel(2, 3);
+            
+            buttony.Add(vypocet);
+            buttony.Add(btnNastaveniSlozek);
+            buttony.Add(vztup);
+            buttony.Add(vyztup);
+            buttony.Add(resetBTN);
         }
 
         private void btnNastaveniSlozek_Click(object sender, EventArgs e)
@@ -71,22 +79,14 @@ namespace BilancniVypocty
         {
             if (nastaveni == null && krmitko == null && !pocitam) // zkontroluji jestli se něco neděje
             {
-                // zakáži uživateli vše
-                Vypocet.Enabled = false;
-                btnNastaveniSlozek.Enabled = false;
-                vztup.Enabled = false;
-                vyztup.Enabled = false;
-                resetBTN.Enabled = false;
                 pocitam = true;
 
-                Thread vypocet = new Thread(Vypocty); // aby aplikace odpovídala
-                vypocet.Start();
+                async void karel () { await Task.Run(() => Vypocty()); }; // asychroní chování, aby nám to nelagovalo
 
-                Vypocet.Enabled = true;
-                btnNastaveniSlozek.Enabled = true;
-                vztup.Enabled = true;
-                vyztup.Enabled = true;
-                resetBTN.Enabled = true;
+                karel(); // co by to bylo za kód bez karla
+
+                // zakáži uživateli vše
+                ZapniButtony();
             }
             else
             {
@@ -96,8 +96,6 @@ namespace BilancniVypocty
 
         public static void Vypocty()
         {
-            pocitam = true;
-
             // získám neznámé a rovnice
             Uzel.uzel.ExtrahujNezname();
             Uzel.uzel.ExtrahujRovnice();
@@ -127,7 +125,24 @@ namespace BilancniVypocty
             ReseniSoustavyRovnic.RESET(); // nastavím vše na původní stav se zachovanými výsledky
 
             pocitam = false;
+
+            // povolím uživateli vše
+            ZapniButtony();
         }
+
+        private static void ZapniButtony() // zakáže / povolíme buttony
+        {
+            foreach (Button item in buttony)
+            {
+                // netuším proč, netuším jak, ale funguje to (nešmatat => křehké)
+                item.BeginInvoke(new Action(() => {
+                    item.Enabled = !pocitam;
+                    }));
+            }
+
+            Application.UseWaitCursor = pocitam;
+        }
+
 
         private static bool LinearniCast() // Gausova eliminace
         {

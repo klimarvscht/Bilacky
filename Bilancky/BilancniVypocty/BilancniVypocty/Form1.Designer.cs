@@ -33,7 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.vztup = new System.Windows.Forms.Button();
             this.vyztup = new System.Windows.Forms.Button();
-            this.Vypocet = new System.Windows.Forms.Button();
+            this.vypocet = new System.Windows.Forms.Button();
             this.schema = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.resetBTN = new System.Windows.Forms.Button();
@@ -79,15 +79,15 @@
             this.vyztup.UseVisualStyleBackColor = true;
             this.vyztup.Click += new System.EventHandler(this.vyztup_Click);
             // 
-            // Vypocet
+            // vypocet
             // 
-            this.Vypocet.Location = new System.Drawing.Point(161, 214);
-            this.Vypocet.Name = "Vypocet";
-            this.Vypocet.Size = new System.Drawing.Size(75, 23);
-            this.Vypocet.TabIndex = 4;
-            this.Vypocet.Text = "Vypočítat";
-            this.Vypocet.UseVisualStyleBackColor = true;
-            this.Vypocet.Click += new System.EventHandler(this.Vypocet_Click);
+            this.vypocet.Location = new System.Drawing.Point(161, 214);
+            this.vypocet.Name = "vypocet";
+            this.vypocet.Size = new System.Drawing.Size(75, 23);
+            this.vypocet.TabIndex = 4;
+            this.vypocet.Text = "Vypočítat";
+            this.vypocet.UseVisualStyleBackColor = true;
+            this.vypocet.Click += new System.EventHandler(this.Vypocet_Click);
             // 
             // schema
             // 
@@ -127,7 +127,7 @@
             this.ClientSize = new System.Drawing.Size(399, 254);
             this.Controls.Add(this.resetBTN);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.Vypocet);
+            this.Controls.Add(this.vypocet);
             this.Controls.Add(this.vyztup);
             this.Controls.Add(this.vztup);
             this.Controls.Add(this.label1);
@@ -151,7 +151,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button vztup;
         private System.Windows.Forms.Button vyztup;
-        private System.Windows.Forms.Button Vypocet;
+        private System.Windows.Forms.Button vypocet;
         private System.Windows.Forms.PictureBox schema;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button resetBTN;
