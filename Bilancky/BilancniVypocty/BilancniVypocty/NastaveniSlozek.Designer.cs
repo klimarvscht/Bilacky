@@ -70,11 +70,11 @@
             this.PocetSlozek.Name = "PocetSlozek";
             this.PocetSlozek.Size = new System.Drawing.Size(68, 13);
             this.PocetSlozek.TabIndex = 1;
-            this.PocetSlozek.Text = "Pocet slozek";
+            this.PocetSlozek.Text = "Počet složek";
             // 
             // Ulozit
             // 
-            this.Ulozit.Location = new System.Drawing.Point(81, 199);
+            this.Ulozit.Location = new System.Drawing.Point(81, 156);
             this.Ulozit.Name = "Ulozit";
             this.Ulozit.Size = new System.Drawing.Size(75, 23);
             this.Ulozit.TabIndex = 2;
@@ -85,15 +85,15 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 72);
+            this.label1.Location = new System.Drawing.Point(32, 55);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 13);
+            this.label1.Size = new System.Drawing.Size(122, 13);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Pocet vztupnich proudů";
+            this.label1.Text = "Počet vstupních proudů";
             // 
             // numVztupProud
             // 
-            this.numVztupProud.Location = new System.Drawing.Point(162, 70);
+            this.numVztupProud.Location = new System.Drawing.Point(162, 55);
             this.numVztupProud.Maximum = new decimal(new int[] {
             5,
             0,
@@ -116,15 +116,15 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(34, 125);
+            this.label2.Location = new System.Drawing.Point(32, 101);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 13);
+            this.label2.Size = new System.Drawing.Size(124, 13);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Pocet vychozich proudu";
+            this.label2.Text = "Počet vychozích proudů";
             // 
             // numVystoupProud
             // 
-            this.numVystoupProud.Location = new System.Drawing.Point(162, 123);
+            this.numVystoupProud.Location = new System.Drawing.Point(162, 99);
             this.numVystoupProud.Maximum = new decimal(new int[] {
             5,
             0,
@@ -148,7 +148,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(243, 242);
+            this.ClientSize = new System.Drawing.Size(244, 198);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.numVystoupProud);
             this.Controls.Add(this.label1);
@@ -160,7 +160,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Name = "nastaveniSlozek";
-            this.Text = "NastaveniSlozek";
+            this.Text = "Nastavení složek";
             ((System.ComponentModel.ISupportInitialize)(this.numPocetSlozek)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numVztupProud)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numVystoupProud)).EndInit();

@@ -30,6 +30,7 @@ namespace BilancniVypocty
             if (ulozit) // klikl na tlačítko uložit
             {
                 UlozitHodnoty();
+                e.Cancel = false;
             }
             else
             {

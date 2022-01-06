@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace BilancniVypocty
 {
-    public partial class Krmitko : Form
+    public partial class Krmitko : Form // žer ty hodnoty
     {
         Proud[] proudy;
         Neznama[] nezname;
@@ -46,7 +46,7 @@ namespace BilancniVypocty
             panel.Controls.Clear(); // vyčistí panel
 
             nezname = proudy[cisloProudu].NeznameDoListu(0, true).ToArray(); // extrahuje neznámé z určitého proudu
-
+             
             // vyresetuje pole
             List<CheckBox> boxy = new List<CheckBox>();
             List<NumericUpDown> num = new List<NumericUpDown>();

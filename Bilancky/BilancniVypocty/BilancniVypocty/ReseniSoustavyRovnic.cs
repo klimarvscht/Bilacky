@@ -257,6 +257,7 @@ namespace BilancniVypocty
                         {
                             nasobiciMatice[j][i] = -nasobiciMatice[j][i];
                         }
+                        vysledkyNasobici[j] = 1 / vysledkyNasobici[j];
                     }
                     VyhazejZaporneHodnotyZNasobiciRovnice(j); // odebereme jmenovatele jelikož by se měl rovnat nule
                     vysledkyNasobici[j] = 0; // nastavíme pravou stranu na 0
@@ -355,7 +356,7 @@ namespace BilancniVypocty
             Console.WriteLine();
         }
 
-        public static void VypisMaticiChytre(float[][] matice, float[] hodnoty) // debub; vypíše hodnotu z matice a jméno, ale jen u nenulových
+        public static void VypisMaticiChytre(float[][] matice, float[] hodnoty, string znamenko) // debub; vypíše hodnotu z matice a jméno, ale jen u nenulových
         {
             Console.WriteLine();
             for (int i = 0; i < matice.Length; i++)

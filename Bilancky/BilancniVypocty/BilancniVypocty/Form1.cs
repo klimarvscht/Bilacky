@@ -17,7 +17,7 @@ namespace BilancniVypocty
         public static Krmitko krmitko = null; // udržuje odkaz na krmítko
         public static bool pocitam = false; // probíhají výpočty?
         
-        private static List<Button> buttony =  new List<Button>();
+        private static List<Button> buttony =  new List<Button>(); // list všech čudlíků ve formu
 
         public Form1()
         {
@@ -53,7 +53,7 @@ namespace BilancniVypocty
         {
             if (nastaveni == null && krmitko == null && !pocitam)
             {
-                krmitko = new Krmitko(Uzel.uzel.vztupniProudy.ToArray(), "Nastavení vztuních proudů");
+                krmitko = new Krmitko(Uzel.uzel.vztupniProudy.ToArray(), "Nastavení vstuních proudů");
                 krmitko.Show();
             }
             else
@@ -66,7 +66,7 @@ namespace BilancniVypocty
         {
             if (nastaveni == null && krmitko == null && !pocitam)
             {
-                krmitko = new Krmitko(Uzel.uzel.vystupniProudy.ToArray(), "Nastavení vztuních proudů");
+                krmitko = new Krmitko(Uzel.uzel.vystupniProudy.ToArray(), "Nastavení vystupních proudů");
                 krmitko.Show();
             }
             else
@@ -141,6 +141,7 @@ namespace BilancniVypocty
             }
 
             Application.UseWaitCursor = pocitam;
+            Cursor.Current = Cursors.Default; // pokud není miší na aplikaci hrozí, že by mu zůstalo kolečko
         }
 
 

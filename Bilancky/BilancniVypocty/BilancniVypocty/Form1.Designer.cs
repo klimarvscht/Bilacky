@@ -65,7 +65,7 @@
             this.vztup.Name = "vztup";
             this.vztup.Size = new System.Drawing.Size(75, 23);
             this.vztup.TabIndex = 2;
-            this.vztup.Text = "vztup";
+            this.vztup.Text = "vstup";
             this.vztup.UseVisualStyleBackColor = true;
             this.vztup.Click += new System.EventHandler(this.vztup_Click);
             // 
